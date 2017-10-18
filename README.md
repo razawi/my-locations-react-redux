@@ -1,3 +1,11 @@
+# Project Notes
+Test with `yarn test` 
+Run with `yarn start`
+
+There is warning message about polyfil and old browsers. 
+unfortanetly not in the time scope for now
+
+
 # requirements
 
 use react-router module for simplicity
