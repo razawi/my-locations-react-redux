@@ -6,6 +6,7 @@ const location = { Name : 'Raz',
                    Coordinates : '32.11,31.1',
                    Category: 'Home'
 }
+const categories =[]
 
 describe('todo actions', () => {
 

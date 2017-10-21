@@ -1,44 +1,51 @@
 import { ADD_CATEGORY, REMOVE_CATEGORY, EDIT_CATEGORY } from '../constants/ActionTypes'
 
-const initialState = [
-  {
-    text: 'Use Redux',
-    completed: false,
-    id: 0
-  }
-]
+const initialState = [{
+    categories: [],
+    locations: [],
+    currentCategory : '',
+    currentLocation : ''
+  }]
 
-const location = { Name : 'Raz', 
+const locationList = { Name : 'Raz', 
     Address : 'Mekor Chaim 66',
     Coordinates : '32.11,31.1',
     Category: 'Home'    
 }
-const categories =[]
+const categoryList =[]
 
+export default function categories (state = initialState, action = {}) {
 
-export default function categories (state = initialState, action) {
   switch (action.type) {
     case ADD_CATEGORY:
-      return [
-        ...state,
-        {
-          id: state.reduce((maxId, todo) => Math.max(todo.id, maxId), -1) + 1,
-          completed: false,
-          text: action.text
-        }
-      ]
+      console.log('state : ', state)
+      let cat = ['stub', 'stub'];
+
+      return Object.assign(state[0], {
+        categories : cat
+      });
 
     case REMOVE_CATEGORY:
-      return state.filter(todo =>
-        todo.id !== action.id
-      )
+      let id = state.categories.indexOf(action.text)
+      let rcat = state.categories.filter(item => item !== action.text);
+      return {
+        categories : cat,
+        locations : state.locations
+      }
 
-    case EDIT_CATEGORY:
-      return state.map(todo =>
-        todo.id === action.id ?
-          { ...todo, text: action.text } :
-          todo
-      )
+    // case EDIT_CATEGORY:
+    //   return state.map(todo =>
+    //     todo.id === action.id ?
+    //       { ...todo, text: action.text } :
+    //       todo
+    //   )
+
+    // case VIEW_CATEGORY:
+    //   return state.map(todo =>
+    //     todo.id === action.id ?
+    //       { ...todo, text: action.text } :
+    //       todo
+    //   )
     default:
       return state
   }
