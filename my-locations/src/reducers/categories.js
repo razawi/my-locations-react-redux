@@ -1,11 +1,11 @@
 import { ADD_CATEGORY, REMOVE_CATEGORY, EDIT_CATEGORY } from '../constants/ActionTypes'
 
-const initialState = [{
+const initialState = {
     categories: [],
     locations: [],
     currentCategory : '',
     currentLocation : ''
-  }]
+  }
 
 const locationList = { Name : 'Raz', 
     Address : 'Mekor Chaim 66',
@@ -18,12 +18,10 @@ export default function categories (state = initialState, action = {}) {
 
   switch (action.type) {
     case ADD_CATEGORY:
-      console.log('state : ', state)
-      let cat = ['stub', 'stub'];
-
-      return Object.assign(state[0], {
-        categories : cat
+      return Object.assign({}, state, {
+        categories : [...state.categories, action.text]
       });
+
 
     case REMOVE_CATEGORY:
       let id = state.categories.indexOf(action.text)

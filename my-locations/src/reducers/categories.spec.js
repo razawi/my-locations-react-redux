@@ -5,14 +5,14 @@ describe('categories reducer', () => {
   it('should handle initial state', () => {
     expect(
         categories(undefined, {})
-    ).toEqual([
+    ).toEqual(
         {
             categories: [],
             locations: [],
             currentCategory : '',
             currentLocation : ''
           }
-    ])
+        )
   })
 
   it('should add category', () => {
@@ -21,7 +21,7 @@ describe('categories reducer', () => {
           text: 'Jest first category'
         })
       ).toEqual({
-            categories: ['stub', 'stub'],
+            categories: ['Jest first category'],
             locations: [],
             currentCategory : '',
             currentLocation : ''
