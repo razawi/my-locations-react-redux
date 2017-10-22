@@ -1,4 +1,4 @@
-import { ADD_CATEGORY, REMOVE_CATEGORY, EDIT_CATEGORY } from '../constants/ActionTypes'
+import { ADD_CATEGORY, REMOVE_CATEGORY, EDIT_CATEGORY, VIEW_CATEGORY } from '../constants/ActionTypes'
 
 const initialState = {
     categories: [],
@@ -22,28 +22,23 @@ export default function categories (state = initialState, action = {}) {
         categories : [...state.categories, action.text]
       });
 
-
     case REMOVE_CATEGORY:
-      let id = state.categories.indexOf(action.text)
-      let rcat = state.categories.filter(item => item !== action.text);
-      return {
-        categories : cat,
-        locations : state.locations
-      }
+      let filteredCat = state.categories.filter(item => item !== action.text);
+      return Object.assign({}, state, {
+        categories : filteredCat
+      });
+    case VIEW_CATEGORY:
+      return Object.assign({}, state, {
+        currentCategory : action.text
+      });
 
-    // case EDIT_CATEGORY:
-    //   return state.map(todo =>
-    //     todo.id === action.id ?
-    //       { ...todo, text: action.text } :
-    //       todo
-    //   )
+    case EDIT_CATEGORY:
+        let editedCat = state.categories.filter(item => item !== state.currentCategory);
+        return Object.assign({}, state, {
+            currentCategory : action.text,
+            categories : [...editedCat, action.text]
+        });
 
-    // case VIEW_CATEGORY:
-    //   return state.map(todo =>
-    //     todo.id === action.id ?
-    //       { ...todo, text: action.text } :
-    //       todo
-    //   )
     default:
       return state
   }
