@@ -4,12 +4,25 @@ import Header from '../components/Header'
 import Categories from '../components/Categories'
 import Locations from '../components/Locations'
 
+import {
+  BrowserRouter as Router,
+  Route,
+  Link
+} from 'react-router-dom'
+
 const App = () => (
   <div>
-    <Header/>
-    <Categories/>
-    <Locations/>
-    <Footer/>
+    <Router>
+      <div>
+      <Header/>
+      <hr/>
+        <Route path="/Categories" component={Categories}/>
+        <Route path="/Locations" component={Locations}/>
+      <hr/>
+      <Footer/>
+      </div>
+
+    </Router>
   </div>
 )
 
