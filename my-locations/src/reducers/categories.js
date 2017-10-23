@@ -7,7 +7,6 @@ const initialState = {
     currentLocation : ''
   }
 
-
 export default function categories (state = initialState, action = {}) {
 
   switch (action.type) {
