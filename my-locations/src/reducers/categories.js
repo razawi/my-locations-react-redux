@@ -1,7 +1,7 @@
 import { ADD_CATEGORY, REMOVE_CATEGORY, EDIT_CATEGORY, VIEW_CATEGORY } from '../constants/ActionTypes'
 
 const initialState = {
-    categories: [],
+    categories: ['cat', 'sec'],
     locations: [],
     currentCategory : '',
     currentLocation : ''
