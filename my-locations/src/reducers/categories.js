@@ -1,10 +1,8 @@
 import { ADD_CATEGORY, REMOVE_CATEGORY, EDIT_CATEGORY, VIEW_CATEGORY } from '../constants/ActionTypes'
 
 const initialState = {
-    categories: ['cat', 'sec'],
-    locations: [],
-    currentCategory : '',
-    currentLocation : ''
+    list: ['cat', 'sec'],
+    current : 'Raz'
   }
 
 export default function categories (state = initialState, action = {}) {

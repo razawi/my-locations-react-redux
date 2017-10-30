@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 import Footer from '../components/Footer'
 import Header from '../components/Header'
 import Categories from '../containers/Categories'
-import Locations from '../components/Locations'
-
+import Locations from '../containers/Locations'
 
 import {
   BrowserRouter as Router,

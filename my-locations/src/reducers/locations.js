@@ -1,10 +1,15 @@
 import { ADD_LOCATION, REMOVE_LOCATION, EDIT_LOCATION, VIEW_LOCATION } from '../constants/ActionTypes'
 
+const emptyLocation = { 
+  Name : '-', 
+  Address : '-',
+  Coordinates : '-',
+  Category: '-'    
+}
+
 const initialState = {
-    categories: [],
-    locations: [],
-    currentCategory : '',
-    currentLocation : ''
+    list: [],
+    current : emptyLocation
   }
 
 export default function locations (state = initialState, action = {}) {

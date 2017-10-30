@@ -5,7 +5,7 @@ import locations from './locations'
 
 const rootReducer = combineReducers({
     categories,
-    locations
+    locations,
 })
 
 export default rootReducer
