@@ -6,9 +6,10 @@ const initialState = {
   }
 
 export default function categories (state = initialState, action = {}) {
-
+  debugger;
   switch (action.type) {
     case ADD_CATEGORY:
+      debugger;
       return Object.assign({}, state, {
         categories : [...state.categories, action.text]
       });

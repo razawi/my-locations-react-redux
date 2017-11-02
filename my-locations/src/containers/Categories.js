@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { ADD_CATEGORY, REMOVE_CATEGORY, EDIT_CATEGORY, VIEW_CATEGORY } from '../constants/ActionTypes'
 import { addCategory } from '../actions'
-import Reducers from '../reducers'
 
 
 const mapStateToProps = (state) => {
@@ -13,43 +13,52 @@ const mapStateToProps = (state) => {
   }
 }
 
+function mapDispatchToProps(dispatch) {
+  debugger;
+  return({
+     addCategory: (value) => {dispatch(addCategory(value))}
+  })
+}
+
 const ViewCategoryMenue = (props) => {
+  debugger;
   return (
     <form>
       <ul>
-        <li>{props.categories.current}</li>
+        <li>{props.categories.list[props.categories.list.length -1]}</li>
       </ul>
       <input type="text"/>
+      <AddCategory> </AddCategory>
     </form>
   )
 }
 
-export default connect(
-  mapStateToProps, {Reducers}
-)(ViewCategoryMenue)
 
 
+const AddCategory = () => {
+  let input
+  //et props = this.props
+  return (
+    <div>
+      <form onSubmit={e => {
+        e.preventDefault()
+        if (!input.value.trim()) {
+          return
+        }
+        addCategory(input.value)
+        input.value = ''
+      }}>
+        <input ref={node => {
+          input = node
+        }} />
+        <button type="submit">
+          Add Category
+        </button>
+      </form>
+    </div>
+  )
+}
 
-// let AddCategory = ({ dispatch }) => {
-//   let input
-//   let props = this.props
-//   return (
-//     <div>
-//       <form onSubmit={e => {
-//         e.preventDefault()
-//         if (!input.value.trim()) {
-//           return
-//         }
-//         dispatch(addCategory(input.value))
-//         input.value = ''
-//       }}>
-//         <input ref={node => {
-//           input = node
-//         }} />
-//         <button type="submit">
-//           Add Category
-//         </button>
-//       </form>
-//     </div>
-//   )
-// }
+
+export default connect(mapStateToProps, 
+  mapDispatchToProps) (ViewCategoryMenue)
