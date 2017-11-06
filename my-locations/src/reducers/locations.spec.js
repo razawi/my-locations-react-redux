@@ -7,18 +7,23 @@ const location = { Name : 'Raz',
     Category: 'Home'    
 }
 
+const emptyLocation = { 
+  Name : '-', 
+  Address : '-',
+  Coordinates : '-',
+  Category: '-'    
+}
+
+const initialState = {
+    list: [],
+    current : emptyLocation
+  }
+
 describe('locations reducer', () => {
   it('should handle initial state', () => {
     expect(
         locations(undefined, {})
-    ).toEqual(
-        {
-            categories: [],
-            locations: [],
-            currentCategory : '',
-            currentLocation : ''
-          }
-        )
+    ).toEqual(initialState)
   })
 
   it('should add location', () => {

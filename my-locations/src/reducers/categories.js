@@ -1,34 +1,32 @@
 import { ADD_CATEGORY, REMOVE_CATEGORY, EDIT_CATEGORY, VIEW_CATEGORY } from '../constants/ActionTypes'
 
 const initialState = {
-    list: ['cat', 'sec'],
-    current : 'Raz'
-  }
+  list: ['cat', 'sec', 'Raz'],
+  current : 'Raz'
+}
 
 export default function categories (state = initialState, action = {}) {
-  debugger;
   switch (action.type) {
     case ADD_CATEGORY:
-      debugger;
       return Object.assign({}, state, {
-        categories : [...state.categories, action.text]
+        list : [...state.list, action.text]
       });
 
     case REMOVE_CATEGORY:
-      let filteredCat = state.categories.filter(item => item !== action.text);
+      let filteredCat = state.list.filter(item => item !== action.text);
       return Object.assign({}, state, {
-        categories : filteredCat
+        list : filteredCat
       });
     case VIEW_CATEGORY:
       return Object.assign({}, state, {
-        currentCategory : action.text
+        current : action.text
       });
 
     case EDIT_CATEGORY:
-        let editedCat = state.categories.filter(item => item !== state.currentCategory);
+        let editedCat = state.list.filter(item => item !== state.current);
         return Object.assign({}, state, {
-            currentCategory : action.text,
-            categories : [...editedCat, action.text]
+          current : action.text,
+          list : [...editedCat, action.text]
         });
 
     default:
