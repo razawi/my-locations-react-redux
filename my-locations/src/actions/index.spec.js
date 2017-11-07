@@ -51,7 +51,4 @@ describe('todo actions', () => {
         type: "EDIT_LOCATION"
     });
   })
-
-
-  
 })

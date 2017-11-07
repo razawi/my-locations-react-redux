@@ -6,8 +6,7 @@ import Locations from '../containers/Locations'
 
 import {
   BrowserRouter as Router,
-  Route,
-  Link
+  Route
 } from 'react-router-dom'
 
 class App extends Component {

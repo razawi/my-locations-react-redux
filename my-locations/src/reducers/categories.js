@@ -13,14 +13,13 @@ export default function categories (state = initialState, action = {}) {
       });
 
     case REMOVE_CATEGORY:
-      let filteredCat = state.list.filter(item => item !== action.text);
+      let filteredCategory = state.list.filter(item => item !== action.text);
       let filteredcurrent = ( (state.current === action.text) ? '' : state.current)
-      console.log('state', JSON.stringify(state))
-      
       return Object.assign({}, state, {
-        list : filteredCat,
+        list : filteredCategory,
         current : filteredcurrent
       });
+
     case VIEW_CATEGORY:
       return Object.assign({}, state, {
         current : action.text

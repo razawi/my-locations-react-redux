@@ -6,7 +6,7 @@ const ViewCategoryMenue = ({categories: {list}, addCategory, removeCategory}) =>
   <form>
     <ul>
       {list.map(category => (
-        <li>{ category }</li>
+        <li key={ category }> { category } </li>
       ))}
     </ul>
     <AddCategory addCategory={addCategory}/>
@@ -40,15 +40,14 @@ const RemoveCategory = ({removeCategory}) => {
   let input
   return (
     <div>
-      <form onSubmit={e => {
-        removeCategory('Raz')
-        input.value = ''
-      }}>
         <input ref={node => input = node} />
-        <button type="submit">
+        <button type="button" onClick= {e => {
+          removeCategory('Raz')
+          input.value = ''
+        }}>
           Remove Category
         </button>
-      </form>
+     
     </div>
   )
 }
