@@ -45,146 +45,119 @@ describe('categories reducer', () => {
   })
 
   it('should remove only category when its current', () => {
-      expect(categories({categories: ['one'], currentCategory : 'one'}, 
+      expect(categories({list: ['one'], current : 'one'}, 
       {
         type: types.REMOVE_CATEGORY,
         text: 'one'
       })
-    ).toEqual({categories: [], currentCategory : ''}
+    ).toEqual({list: [], current : ''}
     )
   })
 
   it('should remove only category when it isnt current', () => {
     let start =  {
-        categories: ['one'],
+        list: ['one'],
         currentCategory : ''
       }
-      expect(categories({categories: ['one'], currentCategory : ''}, 
+      expect(categories({list: ['one'], current : ''}, 
       {
         type: types.REMOVE_CATEGORY,
         text: 'one'
       })
-    ).toEqual({categories: [], currentCategory : ''}
+    ).toEqual({list: [], current : ''}
     )
   })
 
-  it.skip('should remove one category of many', () => {
+  it('should remove one category of many', () => {
     let start =  {
-        categories: ['one', 'two', 'three'],
-        locations: [],
-        currentCategory : '',
-        currentLocation : ''
+        list: ['one', 'two', 'three'],
+        current: ''
       }
       expect(categories(start, {
         type: types.REMOVE_CATEGORY,
         text: 'two'
       })
     ).toEqual({
-          categories: ['one', 'three'],
-          locations: [],
-          currentCategory : '',
-          currentLocation : ''
+          list: ['one', 'three'],
+          current : ''
         }
     )
   })
 
-  it.skip('should completly remove duplicant category', () => {
+  it('should completly remove duplicant category', () => {
     let start =  {
-        categories: ['one', 'two', 'two', 'three', 'two'],
-        locations: [],
-        currentCategory : '',
-        currentLocation : ''
+        list: ['one', 'two', 'two', 'three', 'two'],
+        current : '',
       }
       expect(categories(start, {
         type: types.REMOVE_CATEGORY,
         text: 'two'
       })
     ).toEqual({
-          categories: ['one', 'three'],
-          locations: [],
-          currentCategory : '',
-          currentLocation : ''
+          list: ['one', 'three'],
+          current : '',
         }
     )
   })
 
-  it.skip('should view a first category ', () => {
+  it('should view a first category ', () => {
     let start =  {
-        categories: ['one', 'two', 'three', 'four'],
-        locations: [],
-        currentCategory : '',
-        currentLocation : ''
+        list: ['one', 'two', 'three', 'four'],
+        current : '',
       }
       expect(categories(start, {
             type: types.VIEW_CATEGORY,
             text: 'one'
         })
       ).toEqual({
-            categories: ['one', 'two', 'three', 'four'],
-            locations: [],
-            currentCategory : 'one',
-            currentLocation : ''
+            list: ['one', 'two', 'three', 'four'],
+            current : 'one'
             }
         )
   })
 
-  it.skip('should view a second category', () => {
+  it('should view a second category', () => {
     let start =  {
-        categories: ['one', 'two', 'three', 'four'],
-        locations: [],
-        currentCategory : 'one',
-        currentLocation : ''
+        list: ['one', 'two', 'three', 'four'],
+        current : 'one',
       }
       expect(categories(start, {
             type: types.VIEW_CATEGORY,
             text: 'two'
         })
       ).toEqual({
-            categories: ['one', 'two', 'three', 'four'],
-            locations: [],
-            currentCategory : 'two',
-            currentLocation : ''
-            }
-        )
+            list: ['one', 'two', 'three', 'four'],
+            current : 'two'
+        })
   })
 
-  it.skip('should edit viewd category and change it in categories', () => {
+  it('should edit viewd category and change it in categories', () => {
     let start =  {
-        categories: ['one', 'two', 'three', 'four'],
-        locations: [],
-        currentCategory : 'one',
-        currentLocation : ''
+        list: ['one', 'two', 'three', 'four'],
+        current : 'one'
       }
       expect(categories(start, {
             type: types.EDIT_CATEGORY,
             text: 'raz'
         })
       ).toEqual({
-            categories: ['two', 'three', 'four', 'raz'],
-            locations: [],
-            currentCategory : 'raz',
-            currentLocation : ''
-            }
-        )
+            list: ['two', 'three', 'four', 'raz'],
+            current : 'raz'
+        })
   })
 
-  it.skip('empty currentCategoey - viewd category should change and added to categories', () => {
+  it('empty currentCategoey - viewd category should change and added to categories', () => {
     let start =  {
-        categories: ['one', 'two', 'three', 'four'],
-        locations: [],
-        currentCategory : '',
-        currentLocation : ''
+        list: ['one', 'two', 'three', 'four'],
+        current : ''
       }
       expect(categories(start, {
             type: types.EDIT_CATEGORY,
-            text: 'raz'
+            text: 'seven'
         })
       ).toEqual({
-            categories: ['one', 'two', 'three', 'four', 'raz'],
-            locations: [],
-            currentCategory : 'raz',
-            currentLocation : ''
-            }
-        )
+            list: ['one', 'two', 'three', 'four', 'seven'],
+            current : 'seven'
+        })
   })
 })

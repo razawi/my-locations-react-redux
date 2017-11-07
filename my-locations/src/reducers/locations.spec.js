@@ -220,6 +220,4 @@ describe('locations reducer', () => {
           }
       )
     })
-
-
 })
