@@ -1,4 +1,5 @@
 import React from 'react'
+import './Footer.css'
 
 import {
     BrowserRouter as Router,
@@ -8,7 +9,7 @@ import {
 
   // todo - make link set viewState In order to rerender the Header.
 const Footer = () => (
-    <div>
+    <div className= "footerBody">
      <button>
        <Link to="/Categories">Categories</Link>
      </button>

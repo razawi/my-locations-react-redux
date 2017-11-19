@@ -1,0 +1,18 @@
+.categoriesPanel {
+    height: 600px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.viewMenue{
+    background-color: lightgreen;
+    width: 25%;
+    height: 100%;
+}
+
+.actionPanel{
+    background-color: yellow;
+    width: 75%;
+    height: 100%;
+}

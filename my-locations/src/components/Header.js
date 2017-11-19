@@ -89,7 +89,6 @@ const RemoveElement = ({setActionRemove, actionState}) => {
 }
 
 const Header =({actionState, setActionAdd, setActionEdit, setActionRemove, setActionView}) => {
-    
   return (
     <div className="header">
       <HeaderTitle actionState = {actionState} />
