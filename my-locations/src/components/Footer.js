@@ -6,13 +6,14 @@ import {
     Link
   } from 'react-router-dom'
 
+  // todo - make link set viewState In order to rerender the Header.
 const Footer = () => (
     <div>
      <button>
-      <Link to="/Categories">Categories</Link>
+       <Link to="/Categories">Categories</Link>
      </button>
      <button>
-      <Link to="/Locations">Locations</Link>
+       <Link to="/Locations">Locations</Link>
      </button>
     </div>
   )

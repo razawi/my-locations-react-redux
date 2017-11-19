@@ -5,7 +5,7 @@ import Reducers from '../reducers'
 
 
 const ViewLocationsMenue = () => {
-  debugger;
+  // debugger;
 
 }
 

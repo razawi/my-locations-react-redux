@@ -5,11 +5,20 @@ import './Header.css'
 import uiActions from '../reducers/uiActions'
 
 const HeaderTitle = ({actionState}) => {
-  // access URL window.location Categories / Locations
+  let url = window.location.href
+  let title= ''
+
+  if (url.search('Categories') > -1)
+    title= "Categories"
+  else if (url.search('Locations') > -1)
+    title= "Locations"
+  else
+    title= "My-Locations App"
+
   return (
     <div className="title">
       <p>
-          {actionState}
+        {title}
       </p>
     </div>
    )
