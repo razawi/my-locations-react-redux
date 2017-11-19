@@ -4,7 +4,7 @@ import { addCategory } from '../actions'
 import Reducers from '../reducers'
 
 
-const ViewLocationsMenue = (props) => {
+const ViewLocationsMenue = () => {
   debugger;
 
 }
@@ -14,5 +14,5 @@ export default connect(
                locations: state.locations,
                currentCategory: state.currentCategory,
                currentLocation: state.currentLocation
-              }), {Reducers}
+              }), {}
 )(ViewLocationsMenue)

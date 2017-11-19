@@ -10,3 +10,8 @@ export const removeLocation = location => ({ type: types.REMOVE_LOCATION, payloa
 export const editLocation = location => ({ type: types.EDIT_LOCATION, payload: {location : location}})
 
 export const viewLocation = location => ({ type: types.EDIT_LOCATION, payload: {location : location}})
+
+export const setActionAdd = () => ({ type: types.SET_ACTION_ADD })
+export const setActionRemove = () => ({ type: types.SET_ACTION_REMOVE})
+export const setActionEdit = () => ({ type: types.SET_ACTION_EDIT})
+export const setActionView = () => ({ type: types.SET_ACTION_VIEW})

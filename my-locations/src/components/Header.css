@@ -1,0 +1,27 @@
+
+.title{
+    display: flex;
+    align-items: center;
+    justify-content: center; 
+}
+
+.actionsMenue {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.action{
+    width: 50px;
+    height: 40px;
+    text-align: center;
+    margin: 1px;
+    font-size: 12px;
+  }
+
+  .action > button{
+    font-size: 12px;
+  }

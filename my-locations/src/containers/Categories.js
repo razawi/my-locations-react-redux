@@ -2,7 +2,8 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import * as actions from '../actions'
 
-const ViewCategoryMenue = ({categories: {list}, addCategory, removeCategory}) => (
+const ViewCategoryMenue = ({categories: {list}, addCategory, removeCategory}) => {
+  return (
   <form>
     <ul>
       {list.map(category => (
@@ -12,7 +13,7 @@ const ViewCategoryMenue = ({categories: {list}, addCategory, removeCategory}) =>
     <AddCategory addCategory={addCategory}/>
     <RemoveCategory removeCategory={removeCategory}/>
   </form>
-)
+)}
 
 const AddCategory = ({addCategory}) => {
   let input
@@ -37,17 +38,13 @@ const AddCategory = ({addCategory}) => {
 }
 
 const RemoveCategory = ({removeCategory}) => {
-  let input
   return (
     <div>
-        <input ref={node => input = node} />
         <button type="button" onClick= {e => {
           removeCategory('Raz')
-          input.value = ''
         }}>
           Remove Category
         </button>
-     
     </div>
   )
 }
@@ -58,7 +55,8 @@ export default connect(
     categories : state.categories,
     locations: state.locations,
     currentCategory: state.currentCategory,
-    currentLocation: state.currentLocation
+    currentLocation: state.currentLocation,
+    actionState : state.actionState
   }),
   {
     addCategory: actions.addCategory,

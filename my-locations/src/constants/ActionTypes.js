@@ -6,4 +6,8 @@ export const VIEW_LOCATION = 'VIEW_LOCATION'
 export const ADD_LOCATION = 'ADD_LOCATION'
 export const REMOVE_LOCATION = 'REMOVE_LOCATION'
 export const EDIT_LOCATION = 'EDIT_LOCATION'
+export const SET_ACTION_ADD = 'SET_UI_ADD'
+export const SET_ACTION_REMOVE = 'SET_UI_REMOVE'
+export const SET_ACTION_EDIT = 'SET_UI_EDIT'
+export const SET_ACTION_VIEW = 'SET_UI_VIEW'
 
