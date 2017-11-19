@@ -4,7 +4,6 @@
     align-items: center;
     justify-content: center;
 }
-
 .viewMenue{
     background-color: lightgreen;
     width: 25%;
@@ -15,4 +14,21 @@
     background-color: yellow;
     width: 75%;
     height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.actionPanel * {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.actionFrame{
+    align-items: center;
+    justify-content: center;
+    background-color: purple;
+    width:250px;
+    height:250px;
 }

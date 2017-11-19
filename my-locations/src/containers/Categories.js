@@ -11,21 +11,22 @@ const CategoriesPanel = ({actionState, categories, currentCategory,
       actionForm = <ViewCategory category={currentCategory}/> 
       break;
     case 'EDIT':
-      actionForm = <EditCategory editCategory={editCategory}/> 
+      actionForm = <EditCategory editCategory={editCategory}
+                                 currentCategory={currentCategory}/> 
       break;
     case 'REMOVE':
-      actionForm = <RemoveCategory removeCategory={removeCategory}/> 
+      actionForm = <RemoveCategory removeCategory={removeCategory}
+                                   currentCategory={currentCategory}/> 
       break;
     case 'ADD':
       actionForm = <AddCategory addCategory={addCategory}/>      
       break;
     default:
-
+      actionForm = null;
       break
   }
   return (
     <div className="categoriesPanel"> 
-
       <ViewCategoryMenue
         categories = {categories}
         currentCategory = {currentCategory} />
@@ -39,7 +40,7 @@ const CategoriesPanel = ({actionState, categories, currentCategory,
 
 const ViewCategory = ({Category}) => {
   return (
-    <div>
+    <div className="actionFrame">
         <button type="button">
            Category
         </button>
@@ -50,7 +51,7 @@ const ViewCategory = ({Category}) => {
 const AddCategory = ({addCategory}) => {
   let input
   return (
-    <div>
+    <div className="actionFrame">
         <input ref={node => input = node} />
         <button type="button" onClick= {e => {
           addCategory(input.value)
@@ -62,9 +63,9 @@ const AddCategory = ({addCategory}) => {
   )
 }
 
-const RemoveCategory = ({removeCategory}) => {
+const RemoveCategory = ({removeCategory, currentCategory}) => {
   return (
-    <div>
+    <div className="actionFrame">
         <button type="button" onClick= {e => {
           removeCategory('Raz')
         }}>
@@ -74,9 +75,10 @@ const RemoveCategory = ({removeCategory}) => {
   )
 }
 
-const EditCategory = ({EditCategory}) => {
+const EditCategory = ({EditCategory, currentCategory}) => {
   return (
-    <div>
+    <div className="actionFrame">
+
         <button type="button" onClick= {e => {
           EditCategory('Raz')
         }}>
