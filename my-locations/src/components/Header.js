@@ -1,8 +1,7 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { connect } from 'react-redux'
 import * as actions from '../actions'
 import './Header.css'
-import uiActions from '../reducers/uiActions'
 
 const HeaderTitle = ({actionState}) => {
   let url = window.location.href

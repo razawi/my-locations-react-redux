@@ -2,8 +2,6 @@ import React from 'react'
 import './Footer.css'
 
 import {
-    BrowserRouter as Router,
-    Route,
     Link
   } from 'react-router-dom'
 

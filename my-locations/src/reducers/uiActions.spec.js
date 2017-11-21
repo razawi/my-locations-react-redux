@@ -2,14 +2,14 @@ import uiActions from './uiActions'
 import * as types from '../constants/ActionTypes'
 
 const initialState = {
-
+  actionState : "VIEW"
 }
 
 describe('categories reducer', () => {
   it('should handle initial state', () => {
     expect(
         uiActions(undefined, {})
-    ).toEqual({})
+    ).toEqual(initialState)
   })
 
   it('should set empty state to ADD', () => {
@@ -23,7 +23,7 @@ describe('categories reducer', () => {
   })
 
   it('should set other state to ADD', () => {
-      expect(uiActions({uiState : "REMOVE"}, {
+      expect(uiActions({actionState : "REMOVE"}, {
         type: types.SET_ACTION_ADD
       })
     ).toEqual({
@@ -43,7 +43,7 @@ describe('categories reducer', () => {
   })
 
   it('should set other state to EDIT', () => {
-      expect(uiActions({uiState : "REMOVE"}, {
+      expect(uiActions({actionState : "REMOVE"}, {
         type: types.SET_ACTION_EDIT
       })
     ).toEqual({
@@ -63,7 +63,7 @@ describe('categories reducer', () => {
   })
 
   it('should set other state to VIEW', () => {
-      expect(uiActions({uiState : "REMOVE"}, {
+      expect(uiActions({actionState : "REMOVE"}, {
         type: types.SET_ACTION_VIEW
       })
     ).toEqual({
@@ -83,7 +83,7 @@ describe('categories reducer', () => {
   })
 
   it('should set other state to REMOVE', () => {
-      expect(uiActions({uiState : "ADD"}, {
+      expect(uiActions({actionState : "ADD"}, {
         type: types.SET_ACTION_REMOVE
       })
     ).toEqual({

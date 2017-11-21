@@ -31,4 +31,18 @@
     background-color: purple;
     width:250px;
     height:250px;
+    float: left;
+    clear: none;
+}
+
+.viewMenue > div > button{
+    font-size: 34px;
+    margin-left: 20px;
+    background-color: Transparent;
+    background-repeat:no-repeat;
+    cursor:pointer;
+    overflow: hidden;
+    outline:none;
+    width: 70%;
+    text-align: left;
 }
