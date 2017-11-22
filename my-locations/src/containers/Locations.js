@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import * as actions from '../actions'
 import './Locations.css'
+import {MapComponent} from '../components/GoogleMap'
 
 const CurrentLocation = ({}) => {
   return(
@@ -62,19 +63,6 @@ const LocationsMenue = ({}) => {
   )
 }
 
-class MapComponent extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
-  render(){
-    return (
-      <div className="mapComponent"> 
-        <p> Map </p>
-      </div>
-    )
-  }
-}
 
 class LocationsPanel extends React.Component {
   constructor(props) {

@@ -28,8 +28,6 @@
     background-color: yellow;
     overflow:hidden;
     height:25%;
-    /* align-items: center;
-    justify-content: center; */
 }
 
 .locationsViewBar{
@@ -42,6 +40,3 @@
     justify-content: center;
 }
 
-label {
-    /* display: block; */
-  }
