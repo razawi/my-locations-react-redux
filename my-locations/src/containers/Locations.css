@@ -1,0 +1,33 @@
+
+.locationsMenue{
+    background-color: green;
+    height: 100%;
+    width:25%;
+}
+
+.locationsPanel{
+    height: 600px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: black;
+}
+
+.wrapper{
+    width: 75%;
+    height: 100%;
+}
+
+.mapComponent{
+    background-color: gray;
+    height:65%;
+    overflow:hidden;
+}
+
+.currentLocation{
+    background-color: yellow;
+    overflow:hidden;
+    height:35%;
+    /* align-items: center;
+    justify-content: center; */
+}
