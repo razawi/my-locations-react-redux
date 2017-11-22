@@ -1,8 +1,8 @@
 import { ADD_CATEGORY, REMOVE_CATEGORY, EDIT_CATEGORY, VIEW_CATEGORY } from '../constants/ActionTypes'
 
 const initialState = {
-  list: ['cat', 'sec', 'Raz'],
-  current : 'Raz'
+  list: ['Tel aviv', 'Jerusalem', 'Haifa'],
+  current : 'Tel aviv'
 }
 
 export default function categories (state = initialState, action = {}) {

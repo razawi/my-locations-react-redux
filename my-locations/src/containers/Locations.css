@@ -20,14 +20,28 @@
 
 .mapComponent{
     background-color: gray;
-    height:65%;
+    height:75%;
     overflow:hidden;
 }
 
 .currentLocation{
     background-color: yellow;
     overflow:hidden;
-    height:35%;
+    height:25%;
     /* align-items: center;
     justify-content: center; */
 }
+
+.locationsViewBar{
+    overflow:hidden;
+    height: 40px;
+    background-color: pink;
+    text-align: center;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+}
+
+label {
+    /* display: block; */
+  }

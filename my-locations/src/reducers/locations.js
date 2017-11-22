@@ -1,10 +1,13 @@
 import { ADD_LOCATION, REMOVE_LOCATION, EDIT_LOCATION, VIEW_LOCATION } from '../constants/ActionTypes'
 
 const emptyLocation = { 
-  Name : '-', 
-  Address : '-',
-  Coordinates : '-',
-  Category: '-'    
+  Name : 'Dizengoff Center', 
+  Address : 'Dizengof 92',
+  position: {
+    lat: 30.73,
+    lng: 29.42,
+  },
+  Category: 'Tel aviv'    
 }
 
 const initialState = {
