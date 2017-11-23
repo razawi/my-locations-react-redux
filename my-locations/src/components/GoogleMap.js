@@ -27,21 +27,28 @@ const MyMapComponent = compose(
 export class MapComponent extends React.Component {
     constructor(props) {
       super(props);
+      this.onMarkerClick = this.handleMarkerClick.bind(this);
+      this.onMapClicked = this.handleMapClicked.bind(this);
     }
 
 
     handleMarkerClick = (e) => {
         console.log('handle marker click')
+    }
+    
+    // mapProps, map, clickEvent
+    handleMapClicked = (e) => {
+        console.log('handle Map click')
         debugger;
     }
   
     render(){
-        debugger;
       return (
         <div className="mapComponent"> 
             <MyMapComponent
                 isMarkerShown={true}
                 onMarkerClick={this.handleMarkerClick}
+                onClick={this.handleMapClicked}
             />
         </div>
       )
