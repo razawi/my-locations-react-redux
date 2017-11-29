@@ -12,7 +12,7 @@ const CurrentLocation = ({}) => {
     )
   }
 
-const LocationsMenue = ({}) => {
+const LocationsMenueHeader = ({}) => {
   let grouped = true
   let ungrouped
   let filtered
@@ -24,43 +24,51 @@ const LocationsMenue = ({}) => {
     filtered = (value === "filtered") ? true : false 
   }
 
-  return(
-    <div className="locationsMenue">
-      <div className="locationsViewBar">
-      <label>
-        <input
-          name="locationsView"
-          value = "grouped"
-          type="radio"
-          checked={true} 
-          onChange={handleInputChange} />
-        Grouped
-      </label>
-
-      <label>
-        <input
-          name="locationsView"
-          value = "ungrouped"
-          type="radio"
-          /* checked={ungrouped} */
-          onChange={handleInputChange} />
-        UnGrouped
-      </label>
-      <label>
-        <input
-          name="locationsView"
-          value = "filtered"
-          type="radio"
-          /* checked={filtered} */
-          onChange={handleInputChange} />
-        Filtered comboBox
-      </label>
-      </div>
-      <div className="locationsList">
-       <p> filtered Locations List </p>
-      </div>
+  return (
+    // <div className="locationsMenue">
+    <div className="locationsViewBar">
+    <label>
+      <input
+        name="locationsView"
+        value = "grouped"
+        type="radio"
+        checked={true} 
+        onChange={handleInputChange} />
+      Grouped
+    </label>
+    <label>
+      <input
+        name="locationsView"
+        value = "ungrouped"
+        type="radio"
+        /* checked={ungrouped} */
+        onChange={handleInputChange} />
+      UnGrouped
+    </label>
+    <label>
+      <input
+        name="locationsView"
+        value = "filtered"
+        type="radio"
+        /* checked={filtered} */
+        onChange={handleInputChange} />
+      Filtered comboBox
+    </label>
     </div>
+    //  </div>
   )
+
+}
+
+const LocationsMenue = ({}) => {
+
+  return(
+    <div className="LocationsMenuePanel">
+      <LocationsMenueHeader/>
+      <div className="locationsList">
+        <p> filtered Locations List </p>
+      </div> 
+    </div>)
 }
 
 

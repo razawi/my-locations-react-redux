@@ -1,5 +1,5 @@
 
-.locationsMenue{
+.LocationsMenuePanel{
     background-color: green;
     height: 100%;
     width:25%;
@@ -11,6 +11,7 @@
     align-items: center;
     justify-content: center;
     background-color: black;
+    
 }
 
 .wrapper{
