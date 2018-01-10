@@ -17,13 +17,13 @@ const LocationsMenueHeader = ({menueView, setFilteredMenue, setUnGroupedMenue, s
   const handleInputChange = event => {
     switch (event.target.value) {
       case 'grouped' :
-      setGroupedMenue()
+        setGroupedMenue()
         break;
       case 'ungrouped' :
         setUnGroupedMenue()
         break;
       case 'filtered' :
-      setFilteredMenue()
+        setFilteredMenue()
         break;
       default:
         break;
@@ -93,33 +93,59 @@ class LinkButton extends React.Component {
 }
 
 const LocationLink = ({location, currentLocation}) => {
-  debugger;
+    return(
+      <p> {location.Name} </p>
+    )
+}
+
+const SortedCategoryLink = ({category, currentCategory, locations, currentLocation }) => {
   return(
-    <p> LocationLink </p>
+    <div className="blahtest">
+      <p> {category} </p>
+      {locations.map((location) => { 
+        if (location.Category === category){
+          return(
+            <LocationLink key={location.toString() + 'key'}
+            location={location} currentLocation = {currentLocation} 
+            category={category} />
+          )
+        }
+        else {return null}
+      })}
+    </div>
   )
 }
 
-const GroupedMenueContent = ({locations, currentLocation}) => {
+const GroupedMenueContent = ({locations, currentLocation, categories, currentCategory}) => {
+
   return(
-    <p> Grouped </p>
+    <div className="groupedMenueContent">
+      {categories.map(function(category) { 
+      return(
+        <SortedCategoryLink key={category + 'link'} 
+          category={category} currentCategory ={currentCategory} 
+          locations={locations} currentLocation = {currentLocation} 
+        />
+      )
+      })}
+    </div>
   )
 }
 
-const FilteredMenueContent = ({locations, currentLocation}) => {
+const FilteredMenueContent = ({locations, currentLocation, categories, currentCategory}) => {
+
   return(
     <p> FILTERED </p>
   )
 }
 
 const UnGroupedMenueContent = ({locations, currentLocation}) => {
-  debugger;
-
   return(
     <div className="locationsList">
       {locations.map(function(location) { 
         return(
-          <LocationLink key={location + 'link'} 
-            location={location} currentLocation ={currentLocation} />
+          <LocationLink key={location.toString() + 'key'}
+            location={location} currentLocation = {currentLocation} />
         )
       })}
     </div> 
@@ -132,20 +158,24 @@ const ErrorMenueContent = () => {
   )
 }
 
-const LocationsMenue = ({menueView, setFilteredMenue, setUnGroupedMenue, setGroupedMenue, locations, currentLocation}) => {
+const LocationsMenue = ({menueView, setFilteredMenue, setUnGroupedMenue, setGroupedMenue, 
+      locations, currentLocation, categories, currentCategory}) => {
   let menueType = null;
   switch (menueView){
     case 'GROUPED' :
       menueType = <GroupedMenueContent locations = {locations} 
-                                       currentLocation = {currentLocation} />
+                  currentLocation = {currentLocation} 
+                  categories = {categories} currentCategory = {currentCategory}/>
       break;
     case 'UNGROUPED' :
       menueType = <UnGroupedMenueContent locations = {locations} 
-                                         currentLocation = {currentLocation} />
+                                         currentLocation = {currentLocation} 
+                                         categories = {categories} currentCategory = {currentCategory}/>
       break;
     case 'FILTERED' :
       menueType = <FilteredMenueContent locations = {locations} 
-                                        currentLocation = {currentLocation} />
+                                        currentLocation = {currentLocation} 
+                                        categories = {categories} currentCategory = {currentCategory}/>
       break;
     default:
       menueType = <ErrorMenueContent/> 
@@ -177,7 +207,9 @@ class LocationsPanel extends React.Component {
           setUnGroupedMenue = {this.props.setUnGroupedMenue}
           setGroupedMenue = {this.props.setGroupedMenue} 
           locations = {this.props.locations}
-          currentLocation = {this.props.currentLocation}/>
+          currentLocation = {this.props.currentLocation}
+          currentCategory = {this.props.currentCategory}
+          categories = {this.props.categories}/>
         <div className="wrapper">
           <MapComponent />
           <CurrentLocation />
