@@ -12,65 +12,157 @@ const CurrentLocation = ({}) => {
     )
   }
 
-const LocationsMenueHeader = ({}) => {
-  let grouped = true
-  let ungrouped
-  let filtered
+const LocationsMenueHeader = ({menueView, setFilteredMenue, setUnGroupedMenue, setGroupedMenue}) => {
 
-  const handleInputChange = (event) => {
-    const value = event.target.value
-    grouped = (value === "grouped") ? true : false 
-    ungrouped = (value === "ungrouped") ? true : false 
-    filtered = (value === "filtered") ? true : false 
+  const handleInputChange = event => {
+    switch (event.target.value) {
+      case 'grouped' :
+      setGroupedMenue()
+        break;
+      case 'ungrouped' :
+        setUnGroupedMenue()
+        break;
+      case 'filtered' :
+      setFilteredMenue()
+        break;
+      default:
+        break;
+    }
   }
 
   return (
-    // <div className="locationsMenue">
     <div className="locationsViewBar">
     <label>
       <input
-        name="locationsView"
+        name="locationsView1"
         value = "grouped"
         type="radio"
-        checked={true} 
-        onChange={handleInputChange} />
+        checked={menueView === "GROUPED"} 
+        onChange ={handleInputChange}/>
       Grouped
     </label>
     <label>
       <input
-        name="locationsView"
+        name="locationsView2"
         value = "ungrouped"
         type="radio"
-        /* checked={ungrouped} */
+        checked={menueView === "UNGROUPED"} 
         onChange={handleInputChange} />
       UnGrouped
     </label>
     <label>
       <input
-        name="locationsView"
+        name="locationsView3"
         value = "filtered"
         type="radio"
-        /* checked={filtered} */
+        checked={menueView === "FILTERED"}
         onChange={handleInputChange} />
       Filtered comboBox
     </label>
     </div>
-    //  </div>
   )
-
 }
 
-const LocationsMenue = ({}) => {
+const BoldButton = (props) => {
+  return (
+    <button key={props.text} style={{color: 'blue'}}>
+      {props.text} 
+    </button>
+  )
+}
+
+class LinkButton extends React.Component {
+  constructor(props) {
+    super(props);
+    this.handleClick = this.handleClick.bind(this);
+  }
+
+  handleClick(e) {
+    e.preventDefault();
+    this.props.viewCategory(this.props.text)
+    console.log('The link was clicked.');
+  }
+
+  render(){
+    return (
+      <button key={this.props.text} onClick={this.handleClick}> 
+        {this.props.text} 
+      </button>
+    )
+  }
+}
+
+const LocationLink = ({location, currentLocation}) => {
+  debugger;
+  return(
+    <p> LocationLink </p>
+  )
+}
+
+const GroupedMenueContent = ({locations, currentLocation}) => {
+  return(
+    <p> Grouped </p>
+  )
+}
+
+const FilteredMenueContent = ({locations, currentLocation}) => {
+  return(
+    <p> FILTERED </p>
+  )
+}
+
+const UnGroupedMenueContent = ({locations, currentLocation}) => {
+  debugger;
+
+  return(
+    <div className="locationsList">
+      {locations.map(function(location) { 
+        return(
+          <LocationLink key={location + 'link'} 
+            location={location} currentLocation ={currentLocation} />
+        )
+      })}
+    </div> 
+  )
+}
+
+const ErrorMenueContent = () => {
+  return(
+    <p> ERROR </p>
+  )
+}
+
+const LocationsMenue = ({menueView, setFilteredMenue, setUnGroupedMenue, setGroupedMenue, locations, currentLocation}) => {
+  let menueType = null;
+  switch (menueView){
+    case 'GROUPED' :
+      menueType = <GroupedMenueContent locations = {locations} 
+                                       currentLocation = {currentLocation} />
+      break;
+    case 'UNGROUPED' :
+      menueType = <UnGroupedMenueContent locations = {locations} 
+                                         currentLocation = {currentLocation} />
+      break;
+    case 'FILTERED' :
+      menueType = <FilteredMenueContent locations = {locations} 
+                                        currentLocation = {currentLocation} />
+      break;
+    default:
+      menueType = <ErrorMenueContent/> 
+      break;
+  }
 
   return(
     <div className="LocationsMenuePanel">
-      <LocationsMenueHeader/>
-      <div className="locationsList">
-        <p> filtered Locations List </p>
-      </div> 
+      <LocationsMenueHeader menueView={menueView}
+          setFilteredMenue = {setFilteredMenue}
+          setUnGroupedMenue = {setUnGroupedMenue}
+          setGroupedMenue = {setGroupedMenue} />
+ 
+        {menueType}
+      
     </div>)
 }
-
 
 class LocationsPanel extends React.Component {
   constructor(props) {
@@ -80,11 +172,16 @@ class LocationsPanel extends React.Component {
   render(){
     return (
       <div className="locationsPanel"> 
-      <LocationsMenue />
-      <div className="wrapper">
-        <MapComponent />
-        <CurrentLocation />
-      </div>
+        <LocationsMenue menueView={this.props.menueView}
+          setFilteredMenue = {this.props.setFilteredMenue}
+          setUnGroupedMenue = {this.props.setUnGroupedMenue}
+          setGroupedMenue = {this.props.setGroupedMenue} 
+          locations = {this.props.locations}
+          currentLocation = {this.props.currentLocation}/>
+        <div className="wrapper">
+          <MapComponent />
+          <CurrentLocation />
+        </div>
       </div>
     )
   }
@@ -95,13 +192,29 @@ export default connect(
       return({
         categories : state.categories.list,
         currentCategory: state.categories.current,
-        actionState : state.uiActions.actionState
+        locations : state.locations.list,
+        currentLocation : state.locations.current,
+        actionState : state.uiActions.actionState,
+        menueView : state.locations.menueView
       })
-    },
-    {
+    }, {
       addCategory: actions.addLocation,
       removeCategory: actions.removeLocation,
       editCategory: actions.editLocation,
-      viewCategory: actions.viewLocation
+      viewCategory: actions.viewLocation,
+      setGroupedMenue : actions.setGroupedMenue,
+      setUnGroupedMenue : actions.setUnGroupedMenue,
+      setFilteredMenue : actions.setFilteredMenue
     }
-)(LocationsPanel)
+)(LocationsPanel) 
+
+
+/*
+        <select className="origCategoryName"  ref = {node => menu = node}>
+          {categories.map(function(category) { 
+            return(
+              <option value={category}>{category}</option>
+            )
+          })}
+        </select>
+*/

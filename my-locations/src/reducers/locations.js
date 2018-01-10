@@ -1,6 +1,7 @@
-import { ADD_LOCATION, REMOVE_LOCATION, EDIT_LOCATION, VIEW_LOCATION } from '../constants/ActionTypes'
+import { ADD_LOCATION, REMOVE_LOCATION, EDIT_LOCATION, VIEW_LOCATION,
+  GROUP_MENUE, UNGROUP_MENUE, FILTER_MENUE } from '../constants/ActionTypes'
 
-const emptyLocation = { 
+const initialLocation = { 
   Name : 'Dizengoff Center', 
   Address : 'Dizengof 92',
   position: {
@@ -11,8 +12,9 @@ const emptyLocation = {
 }
 
 const initialState = {
-    list: [],
-    current : emptyLocation
+    list: [initialLocation],
+    current : initialLocation,
+    menueView: "GROUPED"
   }
 
 export default function locations (state = initialState, action = {}) {
@@ -43,6 +45,20 @@ export default function locations (state = initialState, action = {}) {
             locations : [...editedLoc, action.payload]
         });
 
+    case GROUP_MENUE:
+      return Object.assign({}, state, {
+        menueView : "GROUPED"
+      });
+
+    case UNGROUP_MENUE:
+      return Object.assign({}, state, {
+        menueView : "UNGROUPED"
+      });
+
+    case FILTER_MENUE:
+      return Object.assign({}, state, {
+        menueView : "FILTERED"
+      });
     default:
       return state
   }

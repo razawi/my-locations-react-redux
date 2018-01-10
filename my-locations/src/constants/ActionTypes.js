@@ -10,4 +10,7 @@ export const SET_ACTION_ADD = 'SET_UI_ADD'
 export const SET_ACTION_REMOVE = 'SET_UI_REMOVE'
 export const SET_ACTION_EDIT = 'SET_UI_EDIT'
 export const SET_ACTION_VIEW = 'SET_UI_VIEW'
+export const GROUP_MENUE = 'GROUP_MENUE'
+export const UNGROUP_MENUE = 'UNGROUP_MENUE'
+export const FILTER_MENUE = 'FILTER_MENUE'
 

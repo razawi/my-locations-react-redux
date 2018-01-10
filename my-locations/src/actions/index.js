@@ -8,8 +8,11 @@ export const viewCategory = text => ({ type: types.VIEW_CATEGORY, text })
 export const addLocation = location => ({ type: types.ADD_LOCATION, payload: {location : location} })
 export const removeLocation = location => ({ type: types.REMOVE_LOCATION, payload: {location : location} })
 export const editLocation = location => ({ type: types.EDIT_LOCATION, payload: {location : location}})
-
 export const viewLocation = location => ({ type: types.EDIT_LOCATION, payload: {location : location}})
+
+export const setGroupedMenue = () => ({type: types.GROUP_MENUE})
+export const setUnGroupedMenue = () => ({type: types.UNGROUP_MENUE})
+export const setFilteredMenue = () => ({type: types.FILTER_MENUE})
 
 export const setActionAdd = () => ({ type: types.SET_ACTION_ADD })
 export const setActionRemove = () => ({ type: types.SET_ACTION_REMOVE})

@@ -12,7 +12,7 @@ const CategoriesPanel = ({actionState, categories, currentCategory,
       break;
     case 'EDIT':
       actionForm = <EditCategory editCategory={editCategory}
-                                 currentCategory={currentCategory}/> 
+                                 currentCategory={currentCategory} categories= {categories}/> 
       break;
     case 'REMOVE':
       actionForm = <RemoveCategory removeCategory={removeCategory}
@@ -89,12 +89,14 @@ const RemoveCategory = ({removeCategory, currentCategory}) => {
   )
 }
 
-const EditCategory = ({editCategory, currentCategory}) => {
+const EditCategory = ({editCategory, currentCategory, categories}) => {
   let input
   return (
     <div className="actionFrame">
+
         <input ref={node => input = node} />
         <button type="button" onClick= {e => {
+          debugger;
           editCategory(input.value)
           input.value = ''
         }}>
