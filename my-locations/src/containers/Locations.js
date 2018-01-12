@@ -3,6 +3,8 @@ import { connect } from 'react-redux'
 import * as actions from '../actions'
 import './Locations.css'
 import {MapComponent} from '../components/GoogleMap'
+import Select from 'react-select';
+import 'react-select/dist/react-select.css';
 
 const CurrentLocation = ({}) => {
   return(
@@ -57,11 +59,14 @@ const LocationsMenueHeader = ({menueView, setFilteredMenue, setUnGroupedMenue, s
         type="radio"
         checked={menueView === "FILTERED"}
         onChange={handleInputChange} />
-      Filtered comboBox
+      Filtered 
+
     </label>
     </div>
   )
 }
+
+
 
 const BoldButton = (props) => {
   return (
@@ -133,9 +138,21 @@ const GroupedMenueContent = ({locations, currentLocation, categories, currentCat
 }
 
 const FilteredMenueContent = ({locations, currentLocation, categories, currentCategory}) => {
+  const handleChange = (selectedOption) => {
+    console.log(`Selected: ${selectedOption.value}`);
+  }
 
   return(
-    <p> FILTERED </p>
+    <div className="filteredMenue">
+      <Select
+        name="form-field-name"
+        onChange={handleChange}
+        options={categories.map(function(cat){
+          return{value: cat, label: cat}
+        })}
+      />
+      <p> FILTERED </p>
+    </div>
   )
 }
 
