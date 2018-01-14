@@ -66,51 +66,33 @@ const LocationsMenueHeader = ({menueView, setFilteredMenue, setUnGroupedMenue, s
   )
 }
 
+const LocationLink = ({location, currentLocation}) => {
 
-
-const BoldButton = (props) => {
-  return (
-    <button key={props.text} style={{color: 'blue'}}>
-      {props.text} 
-    </button>
-  )
-}
-
-class LinkButton extends React.Component {
-  constructor(props) {
-    super(props);
-    this.handleClick = this.handleClick.bind(this);
-  }
-
-  handleClick(e) {
+  const handleClick = (e) => {
     e.preventDefault();
-    this.props.viewCategory(this.props.text)
+    // set current location
+    debugger;
     console.log('The link was clicked.');
   }
 
-  render(){
-    return (
-      <button key={this.props.text} onClick={this.handleClick}> 
-        {this.props.text} 
-      </button>
-    )
-  }
-}
-
-const LocationLink = ({location, currentLocation}) => {
-    return(
-      <p> {location.Name} </p>
-    )
-}
-
-const SortedCategoryLink = ({category, currentCategory, locations, currentLocation }) => {
+  const className = ((location.Name === currentLocation.Name) ? 'boldButton' : 'button')
   return(
-    <div className="blahtest">
-      <p> {category} </p>
+    <div className={"locationLink"}>
+      <button key={location.Name + 'locationLinkkey'} onClick={handleClick}
+        className={className}>
+        {location.Name} 
+      </button>
+    </div>
+  )
+}
+
+const SortedCategoryLinks = ({category, locations, currentLocation }) => {
+  return(
+    <div className="sortedCategoryLinks">
       {locations.map((location) => { 
         if (location.Category === category){
           return(
-            <LocationLink key={location.toString() + 'key'}
+            <LocationLink key={ location.Name + 'SortedCategorykey'}
             location={location} currentLocation = {currentLocation} 
             category={category} />
           )
@@ -127,33 +109,51 @@ const GroupedMenueContent = ({locations, currentLocation, categories, currentCat
     <div className="groupedMenueContent">
       {categories.map(function(category) { 
       return(
-        <SortedCategoryLink key={category + 'link'} 
-          category={category} currentCategory ={currentCategory} 
-          locations={locations} currentLocation = {currentLocation} 
-        />
+        <div key={ category + 'link'} >
+          <p> {category} </p>
+          <SortedCategoryLinks category={category}
+            locations={locations} currentLocation = {currentLocation} 
+          />
+        </div>
       )
       })}
     </div>
   )
 }
 
-const FilteredMenueContent = ({locations, currentLocation, categories, currentCategory}) => {
-  const handleChange = (selectedOption) => {
-    console.log(`Selected: ${selectedOption.value}`);
+class FilteredMenueContent extends React.Component {
+  constructor(props) {
+    super(props);
+    this.handleChange = this.handleChange.bind(this);
   }
 
-  return(
-    <div className="filteredMenue">
-      <Select
-        name="form-field-name"
-        onChange={handleChange}
-        options={categories.map(function(cat){
-          return{value: cat, label: cat}
-        })}
-      />
-      <p> FILTERED </p>
-    </div>
-  )
+  selectedOption = null
+  handleChange = (selectedOption) => {
+    // console.log(`Selected: ${selectedOption.value}`)
+    this.selectedOption = selectedOption
+    this.forceUpdate()
+  }
+
+  render(){
+    const value = this.selectedOption && this.selectedOption.value;
+    return(
+      <div className="filteredMenue">
+        <Select
+          name="form-field-name"
+          onChange={this.handleChange}
+          value={value}
+          options={this.props.categories.map(function(cat){
+            return{value: cat, label: cat}
+          })}
+        />
+
+        <SortedCategoryLinks key={value + 'SortedClink'} 
+          category={value} locations={this.props.locations} 
+          currentLocation = {this.props.currentLocation} 
+        />
+      </div>
+    )
+  }
 }
 
 const UnGroupedMenueContent = ({locations, currentLocation}) => {
@@ -161,7 +161,7 @@ const UnGroupedMenueContent = ({locations, currentLocation}) => {
     <div className="locationsList">
       {locations.map(function(location) { 
         return(
-          <LocationLink key={location.toString() + 'key'}
+          <LocationLink key={location.Name + 'key'}
             location={location} currentLocation = {currentLocation} />
         )
       })}
@@ -200,7 +200,7 @@ const LocationsMenue = ({menueView, setFilteredMenue, setUnGroupedMenue, setGrou
   }
 
   return(
-    <div className="LocationsMenuePanel">
+    <div className="locationsMenuePanel">
       <LocationsMenueHeader menueView={menueView}
           setFilteredMenue = {setFilteredMenue}
           setUnGroupedMenue = {setUnGroupedMenue}
@@ -256,14 +256,3 @@ export default connect(
       setFilteredMenue : actions.setFilteredMenue
     }
 )(LocationsPanel) 
-
-
-/*
-        <select className="origCategoryName"  ref = {node => menu = node}>
-          {categories.map(function(category) { 
-            return(
-              <option value={category}>{category}</option>
-            )
-          })}
-        </select>
-*/

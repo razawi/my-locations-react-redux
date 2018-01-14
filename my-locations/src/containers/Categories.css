@@ -50,6 +50,7 @@
 .viewMenue > div > button{
     font-size: 34px;
     margin-left: 20px;
+    margin-top:10px;
     background-color: Transparent;
     background-repeat:no-repeat;
     cursor:pointer;

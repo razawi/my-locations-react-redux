@@ -11,8 +11,18 @@ const initialLocation = {
   Category: 'Tel aviv'    
 }
 
+const secondLocation = { 
+  Name : 'Migdal shalom', 
+  Address : 'Hertzel 1',
+  position: {
+    lat: 32.0640482,
+    lng: 34.7674225,
+  },
+  Category: 'Tel aviv'    
+}
+
 const initialState = {
-    list: [initialLocation],
+    list: [initialLocation, secondLocation],
     current : initialLocation,
     menueView: "GROUPED"
   }

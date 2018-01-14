@@ -1,5 +1,5 @@
 
-.LocationsMenuePanel{
+.locationsMenuePanel{
     background-color: green;
     height: 100%;
     width:25%;
@@ -41,3 +41,19 @@
     justify-content: center;
 }
 
+.locationLink > .boldButton{
+    background-color: blue;
+}
+
+.locationLink > button{
+    font-size: 22px;
+    margin-left: 20px;
+    margin-top:10px;
+    background-color: yellowgreen;
+    background-repeat:no-repeat;
+    cursor:pointer;
+    overflow: hidden;
+    outline:none;
+    width: 70%;
+    text-align: left;
+}
