@@ -54,9 +54,9 @@ export default function locations (state = initialState, action = {}) {
       });
 
     case VIEW_LOCATION:
-      // debugger;
+      const newLocation = state.list.filter(loc => loc.Name === action.payload.location) 
       return Object.assign({}, state, {
-        current : action.payload.location
+        current : newLocation[0]
       });
 
     case EDIT_LOCATION:

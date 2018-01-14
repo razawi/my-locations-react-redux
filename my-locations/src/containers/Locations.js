@@ -76,8 +76,7 @@ class LocationLink extends React.Component {
     if (this.props.currentLocation.Name !== this.props.location.Name){
       //todo : set current location
       // debugger;
-      this.props.viewLocation({Name : 'Fake location', Address : 'neverland',position: {lat: 30.04, lng: 34.02,Category: 'Jerusalem'}} )
-      
+      this.props.viewLocation(this.props.location.Name)
     }
   }
 
