@@ -21,8 +21,18 @@ const secondLocation = {
   Category: 'Tel aviv'    
 }
 
+const thirddLocation = { 
+  Name : 'Fake location', 
+  Address : 'neverland',
+  position: {
+    lat: 30.04,
+    lng: 34.02,
+  },
+  Category: 'Jerusalem'    
+}
+
 const initialState = {
-    list: [initialLocation, secondLocation],
+    list: [initialLocation, secondLocation, thirddLocation],
     current : initialLocation,
     menueView: "GROUPED"
   }
@@ -44,14 +54,15 @@ export default function locations (state = initialState, action = {}) {
       });
 
     case VIEW_LOCATION:
+      // debugger;
       return Object.assign({}, state, {
-        currentLocation : action.payload
+        current : action.payload.location
       });
 
     case EDIT_LOCATION:
         let editedLoc = state.categories.filter(item => item !== state.currentLocation);
         return Object.assign({}, state, {
-            currentLocation : action.payload,
+            current : action.payload,
             locations : [...editedLoc, action.payload]
         });
 

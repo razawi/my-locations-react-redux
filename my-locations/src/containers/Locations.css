@@ -1,8 +1,21 @@
+:root {
+    --menue-panel-color: rgb(228, 218, 218);
+    --menue-header-color: rgb(199, 192, 192);
+    --menue-category-color: rgb(211, 193, 193);
+    --location-panel-color: rgb(216, 211, 211);
+}
 
 .locationsMenuePanel{
-    background-color: green;
+    background-color: var( --menue-panel-color);
     height: 100%;
     width:25%;
+}
+
+.groupedMenueContent{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
 }
 
 .locationsPanel{
@@ -10,8 +23,6 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: black;
-    
 }
 
 .wrapper{
@@ -26,7 +37,7 @@
 }
 
 .currentLocation{
-    background-color: yellow;
+    background-color: var(--location-panel-color);
     overflow:hidden;
     height:25%;
 }
@@ -34,26 +45,50 @@
 .locationsViewBar{
     overflow:hidden;
     height: 40px;
-    background-color: pink;
+    background-color: var(--menue-header-color);
     text-align: center;
     display:flex;
     align-items: center;
     justify-content: center;
+    border: hidden double dashed;
+}
+
+.locationsViewBar > label{
+    margin-right :7px;
+    margin-left: 7px;
+
 }
 
 .locationLink > .boldButton{
-    background-color: blue;
+    color:black;
+    font-style: bold;
+    font-size: 23px;
+    margin:0;
 }
 
 .locationLink > button{
+    border: none;
+    margin: 4px;
+    width:100%;
     font-size: 22px;
-    margin-left: 20px;
-    margin-top:10px;
-    background-color: yellowgreen;
-    background-repeat:no-repeat;
+    background-color: var(--menue-panel-color);
+    /* background-repeat:no-repeat; */
     cursor:pointer;
     overflow: hidden;
-    outline:none;
-    width: 70%;
     text-align: left;
+    color:rgb(54, 47, 47);
+}
+
+.categoryTitle > button {
+    width:100%;
+    font-size: 22px;
+    pointer-events: none;
+    background: var(--menue-category-color);
+    border: none;
+    text-align: center;
+    cursor: not-allowed;
+    opacity: 0.65;
+    filter: alpha(opacity=65);
+    -webkit-box-shadow: none;
+    box-shadow: none;
 }

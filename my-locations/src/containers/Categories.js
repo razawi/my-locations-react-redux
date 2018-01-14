@@ -123,7 +123,7 @@ class LinkButton extends React.Component {
   handleClick(e) {
     e.preventDefault();
     this.props.viewCategory(this.props.text)
-    console.log('The link was clicked.');
+    console.log('The link was clicked.')
   }
 
   render(){
