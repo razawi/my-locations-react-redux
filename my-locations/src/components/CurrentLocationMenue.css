@@ -1,0 +1,8 @@
+.viewLocationPanel{
+    justify-content: space-around;
+    display: flex;
+}
+
+.viewLocationPanelWrapper{
+    height: 25%;
+}

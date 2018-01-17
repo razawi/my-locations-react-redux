@@ -3,16 +3,11 @@ import { connect } from 'react-redux'
 import * as actions from '../actions'
 import './Locations.css'
 import {MapComponent} from '../components/GoogleMap'
+import {CurrentLocation} from '../components/CurrentLocationMenue'
 import Select from 'react-select';
 import 'react-select/dist/react-select.css';
 
-const CurrentLocation = ({}) => {
-  return(
-      <div className="currentLocation">
-        <p> Current Location </p>
-      </div>
-    )
-  }
+
 
 const LocationsMenueHeader = ({menueView, setFilteredMenue, 
   setUnGroupedMenue, setGroupedMenue}) => {
@@ -74,13 +69,10 @@ class LocationLink extends React.Component {
   handleClick = (e) => {
     e.preventDefault();
     if (this.props.currentLocation.Name !== this.props.location.Name){
-      //todo : set current location
-      // debugger;
       this.props.viewLocation(this.props.location.Name)
     }
   }
 
- 
   render(){
     const className = ((this.props.location.Name === this.props.currentLocation.Name) ? 'boldButton' : 'button')  
     return(
@@ -166,19 +158,19 @@ class FilteredMenueContent extends React.Component {
         <SortedCategoryLinks key={value + 'SortedClink'} 
           category={value} locations={this.props.locations} 
           currentLocation = {this.props.currentLocation} 
-        />
+          viewLocation ={this.props.viewLocation} />
       </div>
     )
   }
 }
 
-const UnGroupedMenueContent = ({locations, currentLocation}) => {
+const UnGroupedMenueContent = ({locations, currentLocation, viewLocation}) => {
   return(
     <div className="locationsList">
     <br/>
       {locations.map(function(location) { 
         return(
-          <LocationLink key={location.Name + 'key'}
+          <LocationLink key={location.Name + 'key'} viewLocation={viewLocation}
             location={location} currentLocation = {currentLocation} />
         )
       })}
@@ -246,7 +238,10 @@ class LocationsPanel extends React.Component {
           viewLocation = {this.props.viewLocation}/>
         <div className="wrapper">
           <MapComponent />
-          <CurrentLocation />
+          <CurrentLocation 
+            locations = {this.props.locations}
+            currentLocation = {this.props.currentLocation}
+            actionState = {this.props.actionState} />
         </div>
       </div>
     )

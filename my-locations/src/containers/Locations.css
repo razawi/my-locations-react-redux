@@ -62,7 +62,7 @@
 .locationLink > .boldButton{
     color:black;
     font-style: bold;
-    font-size: 23px;
+    font-size: 21px;
     margin:0;
 }
 
@@ -70,9 +70,8 @@
     border: none;
     margin: 4px;
     width:100%;
-    font-size: 22px;
+    font-size: 20px;
     background-color: var(--menue-panel-color);
-    /* background-repeat:no-repeat; */
     cursor:pointer;
     overflow: hidden;
     text-align: left;
