@@ -241,7 +241,8 @@ class LocationsPanel extends React.Component {
           <CurrentLocation 
             locations = {this.props.locations}
             currentLocation = {this.props.currentLocation}
-            actionState = {this.props.actionState} />
+            actionState = {this.props.actionState} 
+            categories = {this.props.categories}/>
         </div>
       </div>
     )

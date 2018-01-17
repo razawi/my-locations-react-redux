@@ -1,7 +1,7 @@
 import { SET_ACTION_ADD, SET_ACTION_REMOVE, SET_ACTION_EDIT, SET_ACTION_VIEW } from '../constants/ActionTypes'
 
 const initialState = {
-  actionState : "VIEW"
+  actionState : "EDIT"
 }
 
 export default function uiActions (state = initialState, action = {}) {
