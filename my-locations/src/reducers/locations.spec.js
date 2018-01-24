@@ -192,15 +192,13 @@ describe('locations reducer', () => {
     })
 
   it('view location when there is no current location ', () => {
-    expect(locations({ categories: [], locations: [location], currentCategory : '', currentLocation : ''}, {
+    expect(locations({  list: [location], current : ''}, {
           type: types.EDIT_LOCATION,
           payload: location
         })
       ).toEqual({
-            categories: [],
-            locations: [location],
-            currentCategory : '',
-            currentLocation : location
+            list: [location],
+            current : location
           }
       )
     })
@@ -208,15 +206,13 @@ describe('locations reducer', () => {
 
   // edit when there is no current location - add to locations array to
   it('view location when there is no current location ', () => {
-    expect(locations({ categories: [], locations: [], currentCategory : '', currentLocation : ''}, {
+    expect(locations({  list: [],current : ''}, {
           type: types.EDIT_LOCATION,
           payload: location
         })
       ).toEqual({
-            categories: [],
-            locations: [location],
-            currentCategory : '',
-            currentLocation : location
+            list: [location],
+            current : location
           }
       )
     })

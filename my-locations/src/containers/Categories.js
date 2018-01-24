@@ -93,10 +93,8 @@ const EditCategory = ({editCategory, currentCategory, categories}) => {
   let input
   return (
     <div className="actionFrame">
-
         <input ref={node => input = node} />
         <button type="button" onClick= {e => {
-          debugger;
           editCategory(input.value)
           input.value = ''
         }}>

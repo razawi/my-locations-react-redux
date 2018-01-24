@@ -43,28 +43,46 @@ export default function locations (state = initialState, action = {}) {
 
   switch (type) {
     case ADD_LOCATION:
-      return Object.assign({}, state, {
-        locations : [...state.locations, location]
+      var v = Object.assign({}, state, {
+        list : [...state.list, JSON.parse(JSON.stringify(location.location)) ],
+        current: JSON.parse(JSON.stringify(location.location))
       });
+      return v;
 
     case REMOVE_LOCATION:
-      let filteredLoc = state.locations.filter(item => item !== action.payload);
+      const emptyLocation  = { 
+        Name : '', 
+        Address : '',
+        position: {
+          lat: 0,
+          lng: 0,
+        },
+        Category: ''    
+      }
+      
+      var filteredLoc = state.list.filter(item => item !== state.current);
+      var newCurrent = filteredLoc[0] || emptyLocation
+
       return Object.assign({}, state, {
-        locations : filteredLoc
+        list : filteredLoc,
+        current: newCurrent
       });
 
-    case VIEW_LOCATION:
-      const newLocation = state.list.filter(loc => loc.Name === action.payload.location) 
+    case VIEW_LOCATION:  
+      const newLocation = state.list.filter(loc => loc.Name === action.payload.locationName) 
+      
       return Object.assign({}, state, {
         current : newLocation[0]
       });
 
     case EDIT_LOCATION:
-        let editedLoc = state.categories.filter(item => item !== state.currentLocation);
-        return Object.assign({}, state, {
-            current : action.payload,
-            locations : [...editedLoc, action.payload]
-        });
+
+      var editedLoc = state.list.filter(item => item !== state.current);
+      var v = Object.assign({}, state, {
+          current : action.payload.location,
+          list : [...editedLoc, action.payload.location]
+      });
+      return v;
 
     case GROUP_MENUE:
       return Object.assign({}, state, {

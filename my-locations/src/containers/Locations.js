@@ -7,8 +7,6 @@ import {CurrentLocation} from '../components/CurrentLocationMenue'
 import Select from 'react-select';
 import 'react-select/dist/react-select.css';
 
-
-
 const LocationsMenueHeader = ({menueView, setFilteredMenue, 
   setUnGroupedMenue, setGroupedMenue}) => {
   const handleInputChange = event => {
@@ -68,13 +66,20 @@ class LocationLink extends React.Component {
 
   handleClick = (e) => {
     e.preventDefault();
-    if (this.props.currentLocation.Name !== this.props.location.Name){
-      this.props.viewLocation(this.props.location.Name)
+    if (this.props.currentLocation && this.props.location){
+      if (this.props.currentLocation.Name !== this.props.location.Name){
+        this.props.viewLocation(this.props.location.Name)
+      }
     }
   }
 
   render(){
-    const className = ((this.props.location.Name === this.props.currentLocation.Name) ? 'boldButton' : 'button')  
+    let className = 'button';
+
+    if (this.props.location && this.props.location.Name && this.props.currentLocation &&
+       (this.props.location.Name === this.props.currentLocation.Name) ){
+       className = 'boldButton';
+    }
     return(
       <div className={"locationLink"}>
         <button key={this.props.location.Name + 'locationLinkkey'} onClick={this.handleClick}
@@ -242,7 +247,10 @@ class LocationsPanel extends React.Component {
             locations = {this.props.locations}
             currentLocation = {this.props.currentLocation}
             actionState = {this.props.actionState} 
-            categories = {this.props.categories}/>
+            categories = {this.props.categories}
+            editLocationAction = {this.props.editLocationAction}
+            addLocationAction = {this.props.addLocationAction}
+            removeLocationAction = {this.props.removeLocationAction}/>
         </div>
       </div>
     )
@@ -260,9 +268,9 @@ export default connect(
         menueView : state.locations.menueView
       })
     }, {
-      addLocation: actions.addLocation,
-      removeLocation: actions.removeLocation,
-      editLocation: actions.editLocation,
+      addLocationAction: actions.addLocation,
+      removeLocationAction: actions.removeLocation,
+      editLocationAction: actions.editLocation,
       viewLocation: actions.viewLocation,
       setGroupedMenue : actions.setGroupedMenue,
       setUnGroupedMenue : actions.setUnGroupedMenue,
