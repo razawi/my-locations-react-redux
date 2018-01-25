@@ -2,6 +2,8 @@ import React from 'react'
 import { connect } from 'react-redux'
 import * as actions from '../actions'
 import './Categories.css'
+import Select from 'react-select';
+import 'react-select/dist/react-select.css';
 
 const CategoriesPanel = ({actionState, categories, currentCategory, 
                           addCategory, removeCategory, editCategory, viewCategory}) => {
@@ -16,7 +18,8 @@ const CategoriesPanel = ({actionState, categories, currentCategory,
       break;
     case 'REMOVE':
       actionForm = <RemoveCategory removeCategory={removeCategory}
-                                   currentCategory={currentCategory}/> 
+                                   currentCategory={currentCategory}
+                                   categories= {categories}/> 
       break;
     case 'ADD':
       actionForm = <AddCategory addCategory={addCategory}/>      
@@ -49,22 +52,24 @@ const Error = () => {
   )
 }
 
+
 const ViewCategory = ({Category}) => {
   return (
     <div className="actionFrame">
-        <button type="button">
+        <button type="button" className="viewButton">
            Category
         </button>
     </div>
   )
 }
 
+
 const AddCategory = ({addCategory}) => {
   let input
   return (
     <div className="actionFrame">
-        <input ref={node => input = node} />
-        <button type="button" onClick= {e => {
+        <input ref={node => input = node} className="actionCatInput"/>
+        <button type="button" className="actionCatButton" onClick= {e => {
           addCategory(input.value)
           input.value = ''
         }}>
@@ -73,35 +78,80 @@ const AddCategory = ({addCategory}) => {
     </div>
   )
 }
+class RemoveCategory extends React.Component {
+  constructor(props) {
+    super(props)
+    this.categoryChange = this.categoryChange.bind(this)
+    this.selectedCategory = this.props.currentCategory
+  }
 
-const RemoveCategory = ({removeCategory, currentCategory}) => {
-  let input
+  categoryChange = (e) => {
+    this.selectedCategory = e.value;
+    const options=this.props.categories.map(function(cat){
+      return{value: cat, label: cat}
+    })
+    debugger;
+    this.forceUpdate()
+  }
+
+  render(){
   return (
-    <div className="actionFrame">
-        <input ref={node => input = node} />
-        <button type="button" onClick= {e => {
-          removeCategory(input.value)
-          input.value = ''
+      <div className="actionFrame">
+        <Select
+          name="form-field-name"
+          onChange={this.categoryChange}
+          value={ this.selectedCategory}
+          options={this.props.categories.map(function(cat){
+              return{value: cat, label: cat, className:"optionSelect"}
+          })}
+          />
+        <button type="button" className="removevActiontButton"
+          onClick= {e => {
+          this.props.removeCategory(this.selectedCategory)
         }}>
           Remove Category
         </button>
-    </div>
-  )
+      </div>
+    )
+  }
 }
 
-const EditCategory = ({editCategory, currentCategory, categories}) => {
-  let input
-  return (
-    <div className="actionFrame">
-        <input ref={node => input = node} />
-        <button type="button" onClick= {e => {
-          editCategory(input.value)
-          input.value = ''
-        }}>
-          Edit Category
-        </button>
-    </div>
-  )
+class EditCategory extends React.Component {
+  constructor(props) {
+    super(props);
+    this.inputChange = this.inputChange.bind(this);
+    this.previousCurrent = this.props.currentCategory
+    this.input =  this.props.currentCategory;
+  }    
+
+  inputChange = (e) => {
+    this.input = e.target.value;
+    if (!e.caller || !e.caller === 'render'){
+      this.forceUpdate();
+    }
+  }
+
+  render(){
+    if (this.previousCurrent !== this.props.currentCategory){
+      this.previousCurrent = this.props.currentCategory;
+      this.inputChange({target : {value : this.props.currentCategory}, caller : 'render' })
+    }
+
+    return (
+      <div className="actionFrame">
+          <input type="text" className="actionCatInput"
+            value={this.input}
+            onChange={this.inputChange}>
+          </input>
+          <button type="button" className="actionCatButton" 
+            onClick= {e => {
+            this.props.editCategory(this.input)
+          }}>
+            Edit Category
+          </button>
+      </div>
+    )
+  }
 }
 
 const BoldButton = (props) => {
