@@ -91,3 +91,44 @@
     -webkit-box-shadow: none;
     box-shadow: none;
 }
+
+@media screen and (max-width: 480px) {
+
+  body {
+    background-color: rgb(206, 201, 201);;
+  }
+
+  .locationsPanel{
+    flex-direction: column;
+    height: auto;
+
+  }
+
+  .locationsMenuePanel{
+    margin-bottom: 1%;
+    background-color: var(--menue-panel-color);
+    width: 85%;
+    height: auto;
+    align-items: center;
+    margin-bottom: 1%;
+  }
+
+  .locationsViewBar{
+    margin-bottom: 1%;
+
+  }
+  .locationLink{
+    margin-bottom: 1%;
+
+  }
+
+  .LocationPanelDataWrap{
+    display: flex;
+    flex-direction: column;
+    padding: 3%;
+  }
+
+  .wrapper {
+    width: 88%;
+  }
+}

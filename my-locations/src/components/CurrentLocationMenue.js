@@ -220,7 +220,6 @@ class PanelRemoveLocation extends React.Component {
 
   remove = (e) => {
     this.props.removeLocationAction();
-    debugger;
   }
 
   render(){

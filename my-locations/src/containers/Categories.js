@@ -90,7 +90,6 @@ class RemoveCategory extends React.Component {
     const options=this.props.categories.map(function(cat){
       return{value: cat, label: cat}
     })
-    debugger;
     this.forceUpdate()
   }
 

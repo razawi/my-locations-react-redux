@@ -130,3 +130,42 @@
 .reloadEdit{
     background-color: rgb(255,0,0);
 }
+
+
+@media screen and (max-width: 480px) {
+
+  .addressPanel{
+    width: 88%;
+  }
+
+  .categoryPanel{
+    width: 88%;
+  }
+
+  .namePanel{
+    width:88%;
+  }
+
+  .positionPanel{
+    margin-top:2%;
+    display: flex;
+    width: 90%;
+    height: auto;
+    flex-direction: column;
+  }
+
+  .positionPanel{
+    text-align: center;
+  }
+
+  .mapComponent{
+    display: none;
+  }
+
+  .editActionCtrl{
+    display: flex;
+    height: auto;
+    justify-content: center;
+    margin-bottom: 3%;
+  }
+}
