@@ -2,7 +2,7 @@ import uiActions from './uiActions'
 import * as types from '../constants/ActionTypes'
 
 const initialState = {
-  actionState : "VIEW"
+  actionState : "EDIT"
 }
 
 describe('categories reducer', () => {

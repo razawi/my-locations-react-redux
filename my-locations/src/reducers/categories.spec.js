@@ -2,8 +2,8 @@ import categories from './categories'
 import * as types from '../constants/ActionTypes'
 
 const initialState = {
-  list: ['cat', 'sec', 'Raz'],
-  current : 'Raz'
+  list: ['Tel aviv', 'Jerusalem', 'Haifa'],
+  current : 'Tel aviv'
 }
 
 describe('categories reducer', () => {
@@ -13,13 +13,13 @@ describe('categories reducer', () => {
     ).toEqual(initialState)
   })
 
-  it('should add category', () => {
+ it('should add category', () => {
     expect(categories(undefined, {
           type: types.ADD_CATEGORY,
           text: 'Jest first category'
         })
       ).toEqual({
-          current: "Raz", list: ["cat", "sec", "Raz", "Jest first category"]
+          current: initialState.current, list: [...initialState.list, "Jest first category"]
           }
       )
   })
@@ -27,15 +27,15 @@ describe('categories reducer', () => {
   it('should add duplicant category', () => {
       expect(categories(initialState, {
         type: types.ADD_CATEGORY,
-        text: 'cat'
+        text: 'Jerusalem'
       })
     ).toEqual({
-      current: "Raz", list: ["cat", "sec", "Raz", "cat"]
+      current: initialState.current, list: [...initialState.list, "Jerusalem"]
       }
     )
   })
 
-  it('should add to an empty list of categories', () => {
+ it('should add to an empty list of categories', () => {
       expect(categories({ list: [], current : ''
       }, {
         type: types.ADD_CATEGORY,

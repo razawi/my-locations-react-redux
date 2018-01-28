@@ -15,24 +15,14 @@ const secondLocation = {
   Name : 'Migdal shalom', 
   Address : 'Hertzel 1',
   position: {
-    lat: 32.0640482,
-    lng: 34.7674225,
+    lat: 32.06,
+    lng: 34.76,
   },
   Category: 'Tel aviv'    
 }
 
-const thirddLocation = { 
-  Name : 'Fake location', 
-  Address : 'neverland',
-  position: {
-    lat: 30.04,
-    lng: 34.02,
-  },
-  Category: 'Jerusalem'    
-}
-
 const initialState = {
-    list: [initialLocation, secondLocation, thirddLocation],
+    list: [initialLocation, secondLocation],
     current : initialLocation,
     menueView: "GROUPED"
   }
@@ -64,7 +54,7 @@ export default function locations (state = initialState, action = {}) {
       var newCurrent = filteredLoc[0] || emptyLocation
 
       return Object.assign({}, state, {
-        list : filteredLoc,
+        list : [...filteredLoc],
         current: newCurrent
       });
 
