@@ -1,0 +1,8 @@
+.cache
+build/node_modules
+*.swp
+node_modules
+dist
+.tmp
+yarn-error.log
+.babel-test-build
