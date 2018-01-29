@@ -96,17 +96,14 @@ const ErrorPanel = () => {
     }
 
     editLat(event){
-      if(parseInt(event.target.value)){
-        this.editLocation.position.lat = parseInt(event.target.value);
-        this.forceUpdate()
-      }
+      this.editLocation.position.lat = event.target.value;
+      this.forceUpdate()
     }
 
     editLng(event){
-      if(parseInt(event.target.value)){
-        this.editLocation.position.lng = parseInt(event.target.value);
-        this.forceUpdate()
-      }
+      this.editLocation.position.lng = event.target.value;
+      this.forceUpdate()
+      
     }
 
     editName(event){
@@ -158,14 +155,14 @@ const ErrorPanel = () => {
               <div className="positionBox">
                 <div className="positionLine">
                   <p> Lat : </p>
-                  <input type="text" name="name" 
+                  <input type="number" step="any" 
                     value={this.editLocation.position.lat}
                     onChange={this.editLat}>
                   </input>
                 </div>
                 <div className="positionLine">
                   <p> Long : </p>
-                  <input type="text" name="name" 
+                  <input type="number" step="any" 
                       value={this.editLocation.position.lng}
                       onChange={this.editLng}>
                   </input>
@@ -290,17 +287,13 @@ class PanelAddLocation extends React.Component {
   }
 
   editLat(event){
-    if(parseInt(event.target.value)){
-      this.editLocation.position.lat = parseInt(event.target.value);
-      this.forceUpdate()
-    }
+    this.editLocation.position.lat = event.target.value;
+    this.forceUpdate()
   }
 
   editLng(event){
-    if(parseInt(event.target.value)){
-      this.editLocation.position.lng = parseInt(event.target.value);
-      this.forceUpdate()
-    }
+    this.editLocation.position.lng = event.target.value;
+    this.forceUpdate()
   }
 
   editName(event){
@@ -346,14 +339,14 @@ class PanelAddLocation extends React.Component {
             <div className="positionBox">
               <div className="positionLine">
                 <p> Lat :</p>
-                <input type="text" name="name" 
+                <input type="number" step="any" 
                   value={this.editLocation.position.lat}
                   onChange={this.editLat}>
                 </input>
               </div>
               <div className="positionLine">
                 <p> Long : </p>
-                <input type="text" name="name" 
+                <input type="number" step="any" 
                     value={this.editLocation.position.lng}
                     onChange={this.editLng}>
                 </input>

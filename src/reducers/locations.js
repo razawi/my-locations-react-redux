@@ -5,8 +5,8 @@ const initialLocation = {
   Name : 'Dizengoff Center', 
   Address : 'Dizengof 92',
   position: {
-    lat: 30.73,
-    lng: 29.42,
+    lat: 32.075477,
+    lng: 34.7757304,
   },
   Category: 'Tel aviv'    
 }
@@ -15,8 +15,8 @@ const secondLocation = {
   Name : 'Migdal shalom', 
   Address : 'Hertzel 1',
   position: {
-    lat: 32.06,
-    lng: 34.76,
+    lat: 32.0640482,
+    lng: 34.7696112,
   },
   Category: 'Tel aviv'    
 }

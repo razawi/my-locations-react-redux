@@ -1,3 +1,7 @@
+
+# Demo
+see the [demo](https://raz-locations.herokuapp.com/)
+
 # Project Notes
 Test with `yarn test` 
 Run with `yarn start`

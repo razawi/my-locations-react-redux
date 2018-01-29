@@ -17,9 +17,10 @@ const MyMapComponent = compose(
 )((props) =>
   <GoogleMap
     defaultZoom={16}
-    defaultCenter={{ lat: 32.077, lng: 34.774 }}
+    defaultCenter={{ lat: props.location.lat, lng: props.location.lng }}
   >
-    {props.isMarkerShown && <Marker position={{ lat: 32.077, lng: 34.774 }} onClick={props.onMarkerClick} />}
+    {props.isMarkerShown && <Marker position={{ lat: props.location.lat, lng: props.location.lng }} 
+    onClick={props.onMarkerClick} />}
   </GoogleMap>
 )
 
@@ -42,9 +43,11 @@ export class MapComponent extends React.Component {
     }
   
     render(){
+      debugger;
       return (
         <div className="mapComponent"> 
             <MyMapComponent
+                location={this.props.currentLocation.position}
                 isMarkerShown={true}
                 onMarkerClick={this.handleMarkerClick}
                 onClick={this.handleMapClicked}

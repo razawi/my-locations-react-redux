@@ -5,6 +5,17 @@
 }
 
 
+.footerBody > button{
+  font-size: 24px;
+  background-color: Transparent;
+  background-repeat:no-repeat;
+  border: none;
+  cursor:pointer;
+  overflow: hidden;
+}
+
+
+
 @media screen and (max-width: 480px) {
   .footerBody > button{
     font-size: 20px;;

@@ -9,6 +9,7 @@
     background-color: var( --menue-panel-color);
     height: 100%;
     width:25%;
+    overflow: scroll;
 }
 
 .groupedMenueContent{
@@ -60,9 +61,9 @@
 }
 
 .locationLink > .boldButton{
-    color:black;
+    color:blue;
     font-style: bold;
-    font-size: 21px;
+    font-size: 24px;
     margin:0;
 }
 
@@ -70,7 +71,7 @@
     border: none;
     margin: 4px;
     width:100%;
-    font-size: 20px;
+    font-size: 22px;
     background-color: var(--menue-panel-color);
     cursor:pointer;
     overflow: hidden;
@@ -111,6 +112,7 @@
     height: auto;
     align-items: center;
     margin-bottom: 1%;
+    overflow: scroll;
   }
 
   .locationsViewBar{

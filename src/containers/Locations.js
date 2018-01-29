@@ -242,7 +242,9 @@ class LocationsPanel extends React.Component {
           categories = {this.props.categories}
           viewLocation = {this.props.viewLocation}/>
         <div className="wrapper">
-          <MapComponent />
+          <MapComponent 
+            currentLocation = {this.props.currentLocation}
+          />
           <CurrentLocation 
             locations = {this.props.locations}
             currentLocation = {this.props.currentLocation}
