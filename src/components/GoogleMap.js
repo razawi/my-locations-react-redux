@@ -39,11 +39,9 @@ export class MapComponent extends React.Component {
     // mapProps, map, clickEvent
     handleMapClicked = (e) => {
         console.log('handle Map click')
-        debugger;
     }
   
     render(){
-      debugger;
       return (
         <div className="mapComponent"> 
             <MyMapComponent
