@@ -9,9 +9,10 @@ Run with `yarn start`
 There is warning message about polyfil and old browsers. 
 unfortanetly not in the time scope for now
 
+# Design
+the project has 2 states. a global state that is reserved in bot redux and the locale storage and other Inner class states for editing.
 
-# requirements
-
+# Requirements
 use react-router module for simplicity
 
 It is expected that you base your design on either a Flux architecture, preferably, Redux, or on MobX.

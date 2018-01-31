@@ -82,15 +82,14 @@ class RemoveCategory extends React.Component {
   constructor(props) {
     super(props)
     this.categoryChange = this.categoryChange.bind(this)
-    this.selectedCategory = this.props.currentCategory
+    this.state = {selectedCategory : this.props.currentCategory}
   }
 
   categoryChange = (e) => {
-    this.selectedCategory = e.value;
+    this.setState({selectedCategory : e.value}) ;
     const options=this.props.categories.map(function(cat){
       return{value: cat, label: cat}
     })
-    this.forceUpdate()
   }
 
   render(){
@@ -99,14 +98,14 @@ class RemoveCategory extends React.Component {
         <Select
           name="form-field-name"
           onChange={this.categoryChange}
-          value={ this.selectedCategory}
+          value={ this.state.selectedCategory}
           options={this.props.categories.map(function(cat){
               return{value: cat, label: cat, className:"optionSelect"}
           })}
           />
         <button type="button" className="removevActiontButton"
           onClick= {e => {
-          this.props.removeCategory(this.selectedCategory)
+          this.props.removeCategory(this.state.selectedCategory)
         }}>
           Remove Category
         </button>
@@ -119,32 +118,29 @@ class EditCategory extends React.Component {
   constructor(props) {
     super(props);
     this.inputChange = this.inputChange.bind(this);
-    this.previousCurrent = this.props.currentCategory
-    this.input =  this.props.currentCategory;
+    this.state = {input :  this.props.currentCategory,
+                  previousCurrent : this.props.currentCategory} ;
   }    
 
   inputChange = (e) => {
-    this.input = e.target.value;
-    if (!e.caller || !e.caller === 'render'){
-      this.forceUpdate();
-    }
+    this.setState({ input : e.target.value});
   }
 
   render(){
-    if (this.previousCurrent !== this.props.currentCategory){
-      this.previousCurrent = this.props.currentCategory;
+    if ( this.state.previousCurrent !== this.props.currentCategory){
+      this.setState({ previousCurrent : this.props.currentCategory});
       this.inputChange({target : {value : this.props.currentCategory}, caller : 'render' })
     }
 
     return (
       <div className="actionFrame">
           <input type="text" className="actionCatInput"
-            value={this.input}
+            value={this.state.input}
             onChange={this.inputChange}>
           </input>
           <button type="button" className="actionCatButton" 
             onClick= {e => {
-            this.props.editCategory(this.input)
+            this.props.editCategory(this.state.input)
           }}>
             Edit Category
           </button>

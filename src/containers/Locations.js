@@ -139,29 +139,27 @@ class FilteredMenueContent extends React.Component {
   constructor(props) {
     super(props);
     this.handleChange = this.handleChange.bind(this);
+    this.state = {selectedOption : ''}
   }
 
-  selectedOption = null
   handleChange = (selectedOption) => {
-    this.selectedOption = selectedOption
-    this.forceUpdate()
+    this.setState({ selectedOption : selectedOption })
   }
 
   render(){
-    const value = this.selectedOption && this.selectedOption.value;
     return(
       <div className="filteredMenue">
         <Select
           name="form-field-name"
           onChange={this.handleChange}
-          value={value}
+          value={this.state.selectedOption.value}
           options={this.props.categories.map(function(cat){
             return{value: cat, label: cat}
           })}
         />
 
-        <SortedCategoryLinks key={value + 'SortedClink'} 
-          category={value} locations={this.props.locations} 
+        <SortedCategoryLinks key={this.state.selectedOption + 'SortedClink'} 
+          category={this.state.selectedOption.value} locations={this.props.locations} 
           currentLocation = {this.props.currentLocation} 
           viewLocation ={this.props.viewLocation} />
       </div>

@@ -55,133 +55,136 @@ const ErrorPanel = () => {
     )
   }
 
-  class PanelEditLocation extends React.Component {
-    constructor(props) {
-      super(props);
-      this.editLocation = JSON.parse(JSON.stringify(this.props.currentLocation))
-      this.previousCurrent = JSON.parse(JSON.stringify(this.props.currentLocation))
-      this.categoryChange = this.categoryChange.bind(this);
-      this.editAddress = this.editAddress.bind(this);
-      this.editName = this.editName.bind(this);
-      this.editLat = this.editLat.bind(this);
-      this.editLng = this.editLng.bind(this);
-      this.reloadEdit = this.reloadEdit.bind(this);
-      this.saveEdit = this.saveEdit.bind(this);
+class PanelEditLocation extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = { Address: this.props.currentLocation.Address,
+      Category : this.props.currentLocation.Category,
+      Name : this.props.currentLocation.Name,
+      positionLat : this.props.currentLocation.position.lat,
+      positionLng : this.props.currentLocation.position.lng 
     }
 
-    saveEdit = (e) => {
-        e.preventDefault();
-        this.props.editLocationAction(this.editLocation)
-    }
+    this.categoryChange = this.categoryChange.bind(this);
+    this.editAddress = this.editAddress.bind(this);
+    this.editName = this.editName.bind(this);
+    this.editLat = this.editLat.bind(this);
+    this.editLng = this.editLng.bind(this);
+    this.reloadEdit = this.reloadEdit.bind(this);
+    this.saveEdit = this.saveEdit.bind(this);
+  }
 
-    reloadEdit= (e) => {
-        e.preventDefault();
-        this.editLocation = JSON.parse(JSON.stringify(this.props.currentLocation))
-        this.categoryChange({value : this.editLocation.Category})
-        this.forceUpdate();
-    }
-
-    categoryChange = (selectedOption) => {
-      this.selectedOption = selectedOption
-      if (selectedOption && selectedOption.value )
-        this.editLocation.Category = selectedOption.value
-      else
-        this.editLocation.Category = ''
-      this.forceUpdate()
-    }
-
-    editAddress(event){
-      this.editLocation.Address = event.target.value;
-      this.forceUpdate()
-    }
-
-    editLat(event){
-      this.editLocation.position.lat = event.target.value;
-      this.forceUpdate()
-    }
-
-    editLng(event){
-      this.editLocation.position.lng = event.target.value;
-      this.forceUpdate()
-      
-    }
-
-    editName(event){
-        this.editLocation.Name = event.target.value;
-        this.forceUpdate()
+  saveEdit = (e) => {
+      e.preventDefault();
+      var editLocation = {
+        Address: this.state.Address,
+        Category : this.state.Category,
+        Name : this.state.Name,
+        position : {
+          lat : this.state.positionLat,
+          lng : this.state.positionLng
+        }
       }
+      this.props.editLocationAction(editLocation)
+  }
 
-    render(){
-      const value = this.selectedOption && this.selectedOption.value || this.editLocation.Category;
+  reloadEdit= (e) => {
+      e.preventDefault();
+      this.setState({ Address: this.props.currentLocation.Address,
+        Category : this.props.currentLocation.Category,
+        Name : this.props.currentLocation.Name,
+        positionLat : this.props.currentLocation.position.lat,
+        positionLng : this.props.currentLocation.position.lng 
+      }, () => {
+        this.categoryChange({value : this.state.Category})
+      })
+  }
 
-      if (JSON.stringify(this.previousCurrent) !== JSON.stringify(this.props.currentLocation)){
-        this.editLocation = JSON.parse(JSON.stringify(this.props.currentLocation))
-        this.previousCurrent = JSON.parse(JSON.stringify(this.props.currentLocation))
-      }
+  categoryChange = (selectedOption) => {
+    this.setState({Category : selectedOption.value})
+  }
 
-      return (
-        <div className="editLocationPanel">
-          <div className="LocationPanelDataWrap">
-            <div className="addressPanel">
-                <p>Address</p> 
-                <input type="text" name="address" 
-                    value={this.editLocation.Address}
-                    onChange={this.editAddress}>
+  editAddress(event){
+    this.setState({Address : event.target.value});
+  }
+
+  editLat(event){
+    this.setState({ positionLat : event.target.value});
+  }
+
+  editLng(event){
+    this.setState({positionLng : event.target.value});
+  }
+
+  editName(event){
+    this.setState({ Name : event.target.value});
+  }
+
+  render(){
+    return (
+      <div className="editLocationPanel">
+        <div className="LocationPanelDataWrap">
+          <div className="addressPanel">
+              <p>Address</p> 
+              <input type="text" name="address" 
+                  value={this.state.Address}
+                  onChange={this.editAddress}>
+              </input>
+          </div>
+
+          <div className="categoryPanel">
+              <p>Category</p> 
+              <Select
+              name="category-select"
+              onChange={this.categoryChange}
+              value={this.state.Category }
+              options={this.props.categories.map(function(cat){
+                  return{value: cat, label: cat}
+              })}
+              />
+          </div>
+
+          <div className="namePanel">
+              <p>Name</p> 
+              <input type="text" name="name" 
+                  value={this.state.Name}
+                  onChange={this.editName}>
+              </input>
+          </div>
+
+          <div className="positionPanel">
+            <p>position</p> 
+            <div className="positionBox">
+              <div className="positionLine">
+                <p> Lat : </p>
+                <input type="number" step="any" 
+                  value={this.state.positionLat}
+                  onChange={this.editLat}>
                 </input>
-            </div>
-
-            <div className="categoryPanel">
-                <p>Category</p> 
-                <Select
-                name="category-select"
-                onChange={this.categoryChange}
-                value={value}
-                options={this.props.categories.map(function(cat){
-                    return{value: cat, label: cat}
-                })}
-                />
-            </div>
-
-            <div className="namePanel">
-                <p>Name</p> 
-                <input type="text" name="name" 
-                    value={this.editLocation.Name}
-                    onChange={this.editName}>
+              </div>
+              <div className="positionLine">
+                <p> Long : </p>
+                <input type="number" step="any" 
+                    value={this.state.positionLng}
+                    onChange={this.editLng}>
                 </input>
-            </div>
-
-            <div className="positionPanel">
-              <p>position</p> 
-              <div className="positionBox">
-                <div className="positionLine">
-                  <p> Lat : </p>
-                  <input type="number" step="any" 
-                    value={this.editLocation.position.lat}
-                    onChange={this.editLat}>
-                  </input>
-                </div>
-                <div className="positionLine">
-                  <p> Long : </p>
-                  <input type="number" step="any" 
-                      value={this.editLocation.position.lng}
-                      onChange={this.editLng}>
-                  </input>
-                </div>
               </div>
             </div>
           </div>
-          <div className="editActionCtrl">
-            <button onClick={this.saveEdit} className="saveEdit">  
-              Save
-            </button>
-            <button onClick={this.reloadEdit} className="reloadEdit">  
-              Reload
-            </button>
-          </div>
         </div>
-      )
-    }
+        <div className="editActionCtrl">
+          <button onClick={this.saveEdit} className="saveEdit">  
+            Save
+          </button>
+          <button onClick={this.reloadEdit} className="reloadEdit">  
+            Reload
+          </button>
+        </div>
+      </div>
+    )
   }
+}
 
 const PanelViewLocation = ({currentLocation, locations}) => {
     return (
@@ -240,9 +243,13 @@ class PanelRemoveLocation extends React.Component {
 class PanelAddLocation extends React.Component {
   constructor(props) {
     super(props);
-    this.editLocation = {
-      Address: '', Category: '', position: {lat: 0, lng: 0}, Name: ''
+    this.state = { Address: '',
+      Category : '',
+      Name : '',
+      positionLat : '',
+      positionLng : ''
     }
+
     this.categoryChange = this.categoryChange.bind(this);
     this.editAddress = this.editAddress.bind(this);
     this.editName = this.editName.bind(this);
@@ -254,62 +261,58 @@ class PanelAddLocation extends React.Component {
 
   saveEdit = (e) => {
       e.preventDefault();
-      this.props.addLocationAction(this.editLocation)
+      var editLocation = {
+        Address: this.state.Address,
+        Category : this.state.Category,
+        Name : this.state.Name,
+        position : {
+          lat : this.state.positionLat,
+          lng : this.state.positionLng
+        }
+      }
+      this.props.addLocationAction(editLocation)
   }
 
   reset= (e) => {
       e.preventDefault();
-      this.editLocation = { 
-          Name : '', 
-          Address : '',
-          position: {
-            lat: 0,
-            lng: 0,
-          },
-          Category: ''    
-      }
-      this.categoryChange({value : ''})
-      this.forceUpdate();
+      this.setState ({ Address: '',
+        Category : '',
+        Name : '',
+        positionLat : '',
+        positionLng : ''
+      }, () => {
+        this.categoryChange({value : ''})
+      })
   }
 
   categoryChange = (selectedOption) => {
-    this.selectedOption = selectedOption
-    if (selectedOption && selectedOption.value )
-      this.editLocation.Category = selectedOption.value
-    else
-      this.editLocation.Category = ''
-    this.forceUpdate()
+    this.setState({ Category : selectedOption.value})
   }
 
   editAddress(event){
-    this.editLocation.Address = event.target.value;
-    this.forceUpdate()
+    this.setState({ Address : event.target.value});
   }
 
   editLat(event){
-    this.editLocation.position.lat = event.target.value;
-    this.forceUpdate()
+    this.setState({ positionLat : event.target.value});
   }
 
   editLng(event){
-    this.editLocation.position.lng = event.target.value;
-    this.forceUpdate()
+    this.setState({positionLng : event.target.value})
   }
 
   editName(event){
-      this.editLocation.Name = event.target.value;
-      this.forceUpdate()
+      this.setState({ Name : event.target.value});
     }
 
   render(){
-    const value = this.selectedOption && this.selectedOption.value;
     return (
       <div className="addLocationPanel">
         <div className="LocationPanelDataWrap">
           <div className="addressPanel">
               <p>Address</p> 
               <input type="text" name="address" 
-                  value={this.editLocation.Address || ''}
+                  value={this.state.Address}
                   onChange={this.editAddress}>
               </input>
           </div>
@@ -319,7 +322,7 @@ class PanelAddLocation extends React.Component {
               <Select
                   name="form-field-name"
                   onChange={this.categoryChange}
-                  value={value}
+                  value={this.state.Category}
                   options={this.props.categories.map(function(cat){
                       return{value: cat, label: cat}
                   })}
@@ -329,7 +332,7 @@ class PanelAddLocation extends React.Component {
           <div className="namePanel">
               <p>Name</p> 
               <input type="text" name="name" 
-                value={this.editLocation.Name || ''}
+                value={this.state.Name || ''}
                 onChange={this.editName}>
               </input>
           </div>
@@ -340,14 +343,14 @@ class PanelAddLocation extends React.Component {
               <div className="positionLine">
                 <p> Lat :</p>
                 <input type="number" step="any" 
-                  value={this.editLocation.position.lat}
+                  value={this.state.positionLat}
                   onChange={this.editLat}>
                 </input>
               </div>
               <div className="positionLine">
                 <p> Long : </p>
                 <input type="number" step="any" 
-                    value={this.editLocation.position.lng}
+                    value={this.state.positionLng}
                     onChange={this.editLng}>
                 </input>
                </div>
